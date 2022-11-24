@@ -1,0 +1,27 @@
+{
+  "name": "yishu-miniapp",
+  "version": "1.0.0",
+  "description": "同城易书",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VINO42/yishu-miniapp.git"
+  },
+  "keywords": [
+    "易书",
+    "同城换书"
+  ],
+  "author": "vino42",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VINO42/yishu-miniapp/issues"
+  },
+  "homepage": "https://github.com/VINO42/yishu-miniapp#readme",
+  "dependencies": {
+    "@vant/weapp": "^1.10.7",
+    "miniprogram-sm-crypto": "^0.3.11"
+  }
+}

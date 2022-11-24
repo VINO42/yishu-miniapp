@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/publishBook/publishBook",
+    "pages/myBooks/myBooks",
+    "pages/citySelect/citySelect",
+    "pages/userBookList/userBookList",
+    "pages/login/login",
+    "pages/messageList/messageList",
+    "pages/sendMessage/sendMessage"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "同城易书",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/icon.jpg",
+        "selectedIconPath": "images/icon.jpg"
+      },{
+        "pagePath": "pages/index/index",
+        "text": "发布图书",
+        "iconPath": "images/icon.jpg",
+        "selectedIconPath": "images/icon.jpg"
+      },{
+        "pagePath": "pages/index/index",
+        "text": "消息",
+        "iconPath": "images/icon.jpg",
+        "selectedIconPath": "images/icon.jpg"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-button": "@vant/weapp/button",
+    "van-icon": "@vant/weapp/icon",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-search": "@vant/weapp/search/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-panel": "@vant/weapp/panel/index"
+  },
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}
