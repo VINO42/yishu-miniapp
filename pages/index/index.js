@@ -1,6 +1,7 @@
 //获取应用实例
-const app = getApp()
+const constant = require('../../utils/constant');
 
+const app = getApp()
 Page({
   data: {
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
@@ -25,6 +26,7 @@ Page({
                   console.log("用户的code:" + res.code);
                   // 可以传给后台，再经过解析获取用户的 openid
                   // 或者可以直接使用微信的提供的接口直接获取 openid ，方法如下：
+                  //请求sessionInfo获取openid和unionId
                   wx.request({
                     // 自行补上自己的 APPID 和 SECRET
                     url: 'http://127.0.0.1:8888/wechat/miniapp/sessionInfo/wx65f894b2e37bed7e' + '?jscode=' + res.code,
@@ -32,8 +34,24 @@ Page({
                       // 获取到用户的 openid
                       console.log(res.data);
                       console.log("用户的openid:" + res.data.data.openid);
+                      console.log(constant.cache_constant.userOpenId)
+                      wx.setStorageSync(constant.cache_constant.userOpenId, res.data.data.openid);
+                      wx.setStorageSync(constant.cache_constant.userUnionId, res.data.data.unionid);
                     }
                   });
+                  //获取模糊地理位置
+                  wx.getFuzzyLocation({
+                    type: 'wgs84',
+                    success(res) {
+                      const latitude = res.latitude
+                      const longitude = res.longitude
+                      console.log("la" + latitude);
+                      console.log("lo" + longitude);
+                      wx.setStorageSync(constant.cache_constant.userLatitude, latitude);
+                      wx.setStorageSync(constant.cache_constant.userLongitude, longitude);
+                    }
+                  });
+    
                 }
               });
             }
@@ -56,19 +74,29 @@ Page({
       // 获取到用户的信息了，打印到控制台上看下
       console.log("用户的信息如下：");
       console.log(e.detail.userInfo);
+      wx.setStorageSync(constant.cache_constant.nickName, e.detail.userInfo.nickName);
+      wx.setStorageSync(constant.cache_constant.avatarUrl, e.detail.userInfo.avatarUrl);
       //授权成功后,通过改变 isHide 的值，让实现页面显示出来，把授权页面隐藏起来
       that.setData({
         isHide: false
       });
-      wx.getFuzzyLocation({
-        type: 'wgs84',
-        success(res) {
-          const latitude = res.latitude
-          const longitude = res.longitude
-          console.log("la" + latitude);
-          console.log("lo" + longitude);
-        }
-      })
+                    //调用系统登录
+                    wx.request({
+                      url: 'http://127.0.0.1:8888/wechat/login',
+                      method: 'POST',
+                      data:{
+                        'unionId':wx.getStorageSync(constant.cache_constant.userUnionId),
+                        'openId':wx.getStorageSync(constant.cache_constant.userOpenId),
+                        'avatar':wx.getStorageSync(constant.cache_constant.avatarUrl),
+                        'longitude':wx.getStorageSync(constant.cache_constant.longitude),
+                        'latitude':wx.getStorageSync(constant.cache_constant.latitude),
+                        'nickName':wx.getStorageSync(constant.cache_constant.nickName)
+                      },
+                      success: res => {
+                        // 获取到用户的 openid
+                        console.log(res.data.data);
+                      }
+                    });
     } else {
       //用户按了拒绝按钮
       wx.showModal({
@@ -79,6 +107,7 @@ Page({
         success: function (res) {
           // 用户没有授权成功，不需要改变 isHide 的值
           if (res.confirm) {
+
             console.log('用户点击了“返回授权”');
           }
         }
