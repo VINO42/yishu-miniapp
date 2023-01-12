@@ -1,39 +1,47 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/logs/logs",
     "pages/publishBook/publishBook",
-    "pages/myBooks/myBooks",
+    "pages/my/my",
     "pages/citySelect/citySelect",
     "pages/userBookList/userBookList",
-    "pages/login/login",
-    "pages/messageList/messageList",
-    "pages/sendMessage/sendMessage"
+    "pages/login/login"
   ],
+  "permission": {
+    "scope.userFuzzyLocation": {
+      "desc": "你的位置信息将用于同城二手书信息展示"
+    }
+  },
+  "requiredPrivateInfos": [
+    "getFuzzyLocation"
+  ],
+  
   "window": {
-    "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "同城易书",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#cc3333",
+    "navigationBarTitleText": "授权登录",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
+  
   },
   "tabBar": {
+  
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "iconPath": "images/icon.jpg",
-        "selectedIconPath": "images/icon.jpg"
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home.png"
       },{
-        "pagePath": "pages/index/index",
+        "pagePath": "pages/publishBook/publishBook",
         "text": "发布图书",
-        "iconPath": "images/icon.jpg",
-        "selectedIconPath": "images/icon.jpg"
+        "iconPath": "images/upload.png",
+        "selectedIconPath": "images/upload.png"
       },{
-        "pagePath": "pages/index/index",
-        "text": "消息",
-        "iconPath": "images/icon.jpg",
-        "selectedIconPath": "images/icon.jpg"
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/mine.png"
       }
     ]
   },

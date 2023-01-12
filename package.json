@@ -23,5 +23,6 @@
   "dependencies": {
     "@vant/weapp": "^1.10.7",
     "miniprogram-sm-crypto": "^0.3.11"
-  }
+  },
+  "devDependencies": {}
 }
