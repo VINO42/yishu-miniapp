@@ -4,5 +4,9 @@ export const cache_constant = {
   userOpenId:"user_openid",
   userUnionId:"user_unionid",
   nickName:"user_nickName",
-  avatarUrl:"user_avatar"
+  avatarUrl:"user_avatar",
+  userInfo:"user_info",
+  userToken:"user_token",
+  userRegion:"user_region"
+
 };
