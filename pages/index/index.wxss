@@ -14,7 +14,7 @@
 }
 
 .content {
-  margin-left: 50rpx;
+  margin-left: 100rpx;
   margin-bottom: 90rpx;
 }
 
