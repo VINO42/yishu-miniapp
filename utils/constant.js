@@ -7,6 +7,6 @@ export const cache_constant = {
   avatarUrl:"user_avatar",
   userInfo:"user_info",
   userToken:"user_token",
-  userRegion:"user_region"
-
+  userRegion:"user_region",
+  cities:"cities"
 };

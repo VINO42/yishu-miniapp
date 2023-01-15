@@ -1,4 +1,3 @@
-
 .header {
   margin: 90rpx 0 90rpx 50rpx;
   border-bottom: 1px solid #ccc;
@@ -6,6 +5,37 @@
   width: 650rpx;
   height: 300rpx;
   line-height: 450rpx;
+}
+
+.topView {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 15;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+}
+
+.searchosition {
+  width: 50%;
+  height: 80rpx;
+  /* flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; */
+}
+
+.cities {
+  /* position: fixed; */
+  /* top: 0%; */
+  /* color: #a6a6a6; */
+  width: 50%;
+  height: 40rpx;
+  /* flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; */
+
 }
 
 .header image {

@@ -1,14 +1,16 @@
 //获取应用实例
-const constant = require('../../utils/constant');
+var constant = require('../../utils/constant');
 
 const app = getApp()
 Page({
   data: {
-    //判断小程序的API，回调，参数，组件等是否在当前版本可用。
+     cityName:"全国",
+       //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isHide: true
+    isHide: false
   },
-  onLoad: function () {
+  onLoad: function (opions) {
+        console.log(opions.regionId)
           //获取模糊地理位置
           wx.getFuzzyLocation({
             type: 'wgs84',
@@ -28,6 +30,7 @@ Page({
                   console.log("geo结果");
                   console.log(res.data.data);
                   wx.setStorageSync(constant.cache_constant.userRegion, res.data.data);
+                  
                 }
               });
             }
@@ -46,7 +49,8 @@ Page({
                     // 自行补上自己的 APPID 和 SECRET
                     url: 'http://127.0.0.1:8888/wechat/miniapp/sessionInfo/wx65f894b2e37bed7e' + '?jscode=' + res.code,
                     success: res => {
-                      // 获取到用户的 openid                    
+                      // 获取到用户的 openid    
+                      console.log( res.data.data.openid)                
                       wx.setStorage(constant.cache_constant.userOpenId, res.data.data.openid);
                       wx.setStorage(constant.cache_constant.userUnionId, res.data.data.unionid);
                     }
@@ -67,7 +71,7 @@ Page({
       }
     });
   },
-
+// 获取用户信息
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
@@ -117,5 +121,12 @@ Page({
         }
       });
     }
-  }
+  },
+  //跳转城市列表
+  bindCities: function () {
+    wx.navigateTo({
+      url: '/pages/cities/index'
+    })
+  } 
+  
 })
