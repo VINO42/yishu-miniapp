@@ -26,7 +26,7 @@ Page({
         console.log(this.data.cityList);
         this.setData({
           cityList: res.data.data
-       })
+        })
       }
     });
   },
@@ -79,13 +79,20 @@ Page({
   onShareAppMessage() {
 
   },
-  cityNameClick:function(event){
-    var id=event.currentTarget.dataset.id;
+  cityNameClick: function (event) {
+    var id = event.currentTarget.dataset.id;
+    var name = event.currentTarget.dataset.name;
     console.log(event.currentTarget.dataset.id);
-    wx.redirectTo({
-      url: '/pages/index/index?regionId='+id
+    let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
+    //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
+    let prevPage = pages[pages.length - 2];
+    //给上个页面赋值
+    prevPage.setData({ regionId: id })
+    prevPage.setData({ regionName: name })
+    wx.navigateBack({
+      delta: 1,
     })
-    },
+  },
 
 
 })

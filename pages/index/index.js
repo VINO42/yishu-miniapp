@@ -4,37 +4,225 @@ var constant = require('../../utils/constant');
 const app = getApp()
 Page({
   data: {
-     cityName:"全国",
-       //判断小程序的API，回调，参数，组件等是否在当前版本可用。
+    listArr: [],     //数据集合
+    pageIndex: 1,    //展示的当前页码
+    pageSize: 40,   //每页加载的数据量（使用的json数据就是40条，实际工作根据需求来）
+    pageCount: 3,    //总页数(假设的，实际应该是根据后台返回的数据)
+    regionName: "全国",
+    regionId: "",
+    query: '',
+    //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isHide: false
+    isHide: true
   },
+  inputEvent: function (e) {
+    this.setData({
+      query: e.detail.value
+    })
+  },
+  /**
+     * 初始化数据
+     */
+  loadInitData() {
+    var that = this
+    var pageIndex = 1
+    if (that.data.pageIndex === 1) {
+      wx.showLoading({
+        title: '加载中...',
+      })
+    }
+    // 刷新时，清空listArr，防止新数据与原数据冲突
+    that.setData({
+      listArr: []
+    })
+
+    //发送请求
+    wx.request({
+      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+20,
+      data: {
+        'title':  that.data.query,
+        'regionId': this.data.regionId,
+      },
+      header: {
+        'content-type': 'application/json',
+        'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
+      },
+      method: 'POST',
+      success: function (res) {
+        // var data = JSON.parse(Dec.Decrypt(res.data));
+        var data= res.data.data;
+        console.log(1111111111)
+
+        console.log(data)
+        var tempList = res.data.data.records;
+        that.setData({
+          pageCount: Math.ceil(data.total / 20),
+          pageIndex: 1,
+          ['listArr[' + (pageIndex - 1) + ']']: tempList  //动态修改数组某一项的值，需要加中括号
+        })
+        // console.log(that.data.listArr)
+      },
+      fail: function (res) {
+        console.log(11223)
+        wx.showLoading({
+          title: '加载失败...',
+        })
+      },
+      complete: function (res) {
+        wx.hideLoading();
+      },
+    })
+
+  },
+  //加载更多
+  loadMore() {
+    var that = this
+    var pageIndex = that.data.pageIndex
+    pageIndex += 1
+    wx.showLoading({
+      title: '加载第' + pageIndex + '页',
+    })
+    console.log(that.data.query)
+    wx.request({
+      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+20,
+      data: {
+        'title':  that.data.query,
+        'regionId': this.data.regionId
+      },
+      header: {
+        'content-type': 'application/json',
+        'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
+      },
+      method: 'POST',
+      success: function (res) {
+        var data =res.data.data;
+
+        //将新一页的数据添加到原数据后面
+        let newList = data.records;
+        that.setData({
+          pageIndex: pageIndex,
+          ['listArr[' + (pageIndex - 1) + ']']: newList
+        })
+        // console.log(that.data.listArr)
+      },
+      fail: function (res) { },
+      complete: function (res) {
+        wx.hideLoading()
+      },
+    })
+
+  },
+  /**
+* 输入框失去焦点时候触发
+* @param {} e 
+*/
+  searchEvent: function (e) {
+    if (this.data.recipeInfo.length == 0 || this.data.recipeInfo.length == 0) {
+      console.log("aaa")
+    } else {
+      // console.log(this.data.recipeInfo)
+
+      this.setData({
+        recipeInfo: '用户名：' + this.data.userN,
+        passWd: '密码：' + this.data.passW
+      })
+    }
+  },
+  /**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+onPullDownRefresh: function () {
+  let that = this
+  that.loadInitData()
+},
+/**
+ * 页面上拉触底事件的处理函数
+ */
+onReachBottom: function () {
+  let that = this,
+    pageIndex = that.data.pageIndex,
+    pageCount = that.data.pageCount;
+  //当页面小于总页数时加载下页面
+  if (pageIndex < pageCount) {
+    that.loadMore()
+  } else {
+    wx.showToast({
+      title: '没有更多数据了',
+    })
+  }
+},
+onSearch() {
+  Toast('搜索' + this.data.value);
+},
+// 搜索事件处理函数
+searchClick() {
+  var _this = this;
+  var pageIndex = 1;
+  console.log("searchclick1")
+
+
+
+  _this.setData({
+    listArr: [],
+    pageCount: 0
+  })
+  wx.request({
+    method: "POST",
+    url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+20,
+    method: 'POST',
+    data: {
+      'title':   this.data.query,
+      'regionId': this.data.regionId,
+    },
+    header: {
+      'content-type': 'application/json',
+      'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
+    },
+    success: function (res) {
+      var data = res.data.data;
+      console.log(data)
+
+      let newList = data.records;
+      _this.setData({
+        pageIndex: pageIndex,
+        pageCount: Math.ceil(data.total / 20),
+        ['listArr[' + (pageIndex - 1) + ']']: newList
+      }),
+        pageIndex += 1
+    },
+    fail: function (res) { },
+    complete: function (res) {
+      wx.hideLoading()
+    },
+  }
+  )
+},
   onLoad: function (opions) {
-        console.log(opions.regionId)
-          //获取模糊地理位置
-          wx.getFuzzyLocation({
-            type: 'wgs84',
-            success(res) {
-              wx.setStorageSync(constant.cache_constant.userLatitude, String(res.latitude));
-              wx.setStorageSync(constant.cache_constant.userLongitude, String(res.longitude));
-              wx.request({
-                url: 'http://127.0.0.1:8888/wechat/geo',
-                method: 'POST',
-                data: {
-                  'openId': wx.getStorageSync(constant.cache_constant.userOpenId),
-                  'longitude': String(res.longitude),
-                  'latitude': String(res.latitude),
-                },
-                success: res => {
-                  // geo
-                  console.log("geo结果");
-                  console.log(res.data.data);
-                  wx.setStorageSync(constant.cache_constant.userRegion, res.data.data);
-                  
-                }
-              });
-            }
-          });
+    console.log(opions.regionId)
+    //获取模糊地理位置
+    wx.getFuzzyLocation({
+      type: 'wgs84',
+      success(res) {
+        wx.setStorageSync(constant.cache_constant.userLatitude, String(res.latitude));
+        wx.setStorageSync(constant.cache_constant.userLongitude, String(res.longitude));
+        wx.request({
+          url: 'http://127.0.0.1:8888/wechat/geo',
+          method: 'POST',
+          data: {
+            'openId': wx.getStorageSync(constant.cache_constant.userOpenId),
+            'longitude': String(res.longitude),
+            'latitude': String(res.latitude),
+          },
+          success: res => {
+            // geo
+            console.log("geo结果");
+            console.log(res.data.data);
+            wx.setStorageSync(constant.cache_constant.userRegion, res.data.data);
+
+          }
+        });
+      }
+    });
     var that = this;
     // 查看是否授权
     wx.getSetting({
@@ -50,9 +238,9 @@ Page({
                     url: 'http://127.0.0.1:8888/wechat/miniapp/sessionInfo/wx65f894b2e37bed7e' + '?jscode=' + res.code,
                     success: res => {
                       // 获取到用户的 openid    
-                      console.log( res.data.data.openid)                
-                      wx.setStorage(constant.cache_constant.userOpenId, res.data.data.openid);
-                      wx.setStorage(constant.cache_constant.userUnionId, res.data.data.unionid);
+                      console.log(res.data.data.openid)
+                      wx.setStorageSync(constant.cache_constant.userOpenId, res.data.data.openid);
+                      wx.setStorageSync(constant.cache_constant.userUnionId, res.data.data.unionid);
                     }
                   });
 
@@ -71,7 +259,7 @@ Page({
       }
     });
   },
-// 获取用户信息
+  // 获取用户信息
   bindGetUserInfo: function (e) {
     if (e.detail.userInfo) {
       //用户按了允许授权按钮
@@ -127,6 +315,5 @@ Page({
     wx.navigateTo({
       url: '/pages/cities/index'
     })
-  } 
-  
+  }
 })

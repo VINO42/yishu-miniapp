@@ -24,18 +24,30 @@
   align-items: center;
   justify-content: flex-end; */
 }
-
+.cardview{
+  color: aqua;
+  background-color: aqua;
+}
+.page-section-spacing{
+  margin-top: 140rpx;
+}
 .cities {
   /* position: fixed; */
   /* top: 0%; */
   /* color: #a6a6a6; */
   width: 50%;
+  font-size: medium;
+  align-items: center;
+  margin-top: 50;
   height: 40rpx;
   /* flex-wrap: wrap;
   display: flex;
   align-items: center;
   justify-content: flex-end; */
 
+}
+.scrollview{
+  margin-top: 60;
 }
 
 .header image {
@@ -53,6 +65,7 @@
   color: #9d9d9d;
   margin-top: 40rpx;
 }
+
 
 .bottom {
   border-radius: 80rpx;
