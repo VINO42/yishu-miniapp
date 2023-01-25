@@ -89,16 +89,11 @@ Page({
     //给上个页面赋值
     prevPage.setData({ regionId: id })
     prevPage.setData({ regionName: name })
+    
+    prevPage.setData({ listArr: [] })
+    prevPage.loadInitData();
     wx.navigateBack({
       delta: 1,
-      success:function(){
-        // let currPages = getCurrentPages();
-
-        // wx.redirectTo({
-        //         url: "/" + currPages[currPages.length - 1].route,
-
-        //  });
-      }
     })
   },
 

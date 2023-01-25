@@ -198,7 +198,13 @@ searchClick() {
   )
 },
   onLoad: function (opions) {
+    console.log(5555555555)
+
     console.log(opions.regionId)
+    if(opions.regionId){
+      console.log(666666666666)
+      this.loadInitData();
+    }
     //获取模糊地理位置
     wx.getFuzzyLocation({
       type: 'wgs84',
@@ -219,7 +225,7 @@ searchClick() {
             console.log(res.data.data);
             wx.setStorageSync(constant.cache_constant.userRegionId, res.data.data.id);
             wx.setStorageSync(constant.cache_constant.userRegionName, res.data.data.name);
-            
+
           }
         });
       }
@@ -260,6 +266,15 @@ searchClick() {
         }
       }
     });
+    let currPages = getCurrentPages();
+
+    let regionId1=wx.getStorageSync(constant.cache_constant.userRegionId);
+    let regionName1=wx.getStorageSync(constant.cache_constant.userRegionName);
+    let currPage = currPages[currPages.length - 1];
+
+    currPage.setData({ 'regionId': regionId1 })
+    currPage.setData({ 'regionName': regionName1 })
+     this.loadInitData();
   },
   onReady: function(options){
     this.data.regionId=wx.getStorageSync(constant.cache_constant.userRegionId);
