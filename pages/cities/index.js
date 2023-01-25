@@ -91,6 +91,14 @@ Page({
     prevPage.setData({ regionName: name })
     wx.navigateBack({
       delta: 1,
+      success:function(){
+        // let currPages = getCurrentPages();
+
+        // wx.redirectTo({
+        //         url: "/" + currPages[currPages.length - 1].route,
+
+        //  });
+      }
     })
   },
 

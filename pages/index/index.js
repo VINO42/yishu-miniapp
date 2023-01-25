@@ -13,7 +13,7 @@ Page({
     query: '',
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isHide: true
+    isHide: false
   },
   inputEvent: function (e) {
     this.setData({
@@ -38,7 +38,7 @@ Page({
 
     //发送请求
     wx.request({
-      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+20,
+      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+10,
       data: {
         'title':  that.data.query,
         'regionId': this.data.regionId,
@@ -56,7 +56,7 @@ Page({
         console.log(data)
         var tempList = res.data.data.records;
         that.setData({
-          pageCount: Math.ceil(data.total / 20),
+          pageCount: Math.ceil(data.total / 10),
           pageIndex: 1,
           ['listArr[' + (pageIndex - 1) + ']']: tempList  //动态修改数组某一项的值，需要加中括号
         })
@@ -84,7 +84,7 @@ Page({
     })
     console.log(that.data.query)
     wx.request({
-      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+20,
+      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+10,
       data: {
         'title':  that.data.query,
         'regionId': this.data.regionId
@@ -168,7 +168,7 @@ searchClick() {
   })
   wx.request({
     method: "POST",
-    url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+20,
+    url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+10,
     method: 'POST',
     data: {
       'title':   this.data.query,
@@ -185,7 +185,7 @@ searchClick() {
       let newList = data.records;
       _this.setData({
         pageIndex: pageIndex,
-        pageCount: Math.ceil(data.total / 20),
+        pageCount: Math.ceil(data.total / 10),
         ['listArr[' + (pageIndex - 1) + ']']: newList
       }),
         pageIndex += 1
@@ -206,7 +206,7 @@ searchClick() {
         wx.setStorageSync(constant.cache_constant.userLatitude, String(res.latitude));
         wx.setStorageSync(constant.cache_constant.userLongitude, String(res.longitude));
         wx.request({
-          url: 'http://127.0.0.1:8888/wechat/geo',
+          url: 'http://127.0.0.1:8888/wechat/common/geo',
           method: 'POST',
           data: {
             'openId': wx.getStorageSync(constant.cache_constant.userOpenId),
@@ -217,8 +217,9 @@ searchClick() {
             // geo
             console.log("geo结果");
             console.log(res.data.data);
-            wx.setStorageSync(constant.cache_constant.userRegion, res.data.data);
-
+            wx.setStorageSync(constant.cache_constant.userRegionId, res.data.data.id);
+            wx.setStorageSync(constant.cache_constant.userRegionName, res.data.data.name);
+            
           }
         });
       }
@@ -241,6 +242,7 @@ searchClick() {
                       console.log(res.data.data.openid)
                       wx.setStorageSync(constant.cache_constant.userOpenId, res.data.data.openid);
                       wx.setStorageSync(constant.cache_constant.userUnionId, res.data.data.unionid);
+                      
                     }
                   });
 
@@ -258,6 +260,14 @@ searchClick() {
         }
       }
     });
+  },
+  onReady: function(options){
+    this.data.regionId=wx.getStorageSync(constant.cache_constant.userRegionId);
+    this.data.regionName=wx.getStorageSync(constant.cache_constant.userRegionName);
+    console.log(2332)
+    console.log(this.data.regionId);
+    console.log(this.data.regionName);
+
   },
   // 获取用户信息
   bindGetUserInfo: function (e) {
@@ -290,6 +300,7 @@ searchClick() {
           console.log(res.data.data);
           wx.setStorageSync(constant.cache_constant.userInfo, res.data.data);
           wx.setStorageSync(constant.cache_constant.userToken, res.data.data.token);
+
         }
       });
 

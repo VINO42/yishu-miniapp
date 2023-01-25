@@ -47,7 +47,7 @@
 
 }
 .scrollview{
-  margin-top: 60;
+  margin-top: 300rpx;
 }
 
 .header image {

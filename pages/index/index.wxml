@@ -20,20 +20,15 @@
 <view wx:else>
 
   <view>
+    <view >
     <view class="topView">
-      <!-- <van-cell-group>
-      <van-cell class="cities" is-link value="全国 "arrow-direction="down" bind:click='bindCities'/>
-    </van-cell-group> -->
           <input class="cities" type="text" bindtap="bindCities" id='{{regionId}}' value="{{regionName}}" />
-
       <van-search field-class="searchosition" value="{{ inputval }}" placeholder="请输入书籍或isbn" background='red' bind:blur="inputEvent" bind:search="onSearch" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="onSearch" shape="round">
         <view slot="action" bind:tap="searchClick">搜索</view>
       </van-search>
-
-
-    </view>
+      </view>
     <view class="page-section-spacing">
-      <scroll-view class="scrollview">
+      <scroll-view class="scrollview"scroll-y="true" style="height: 900rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
         <block wx:for="{{listArr}}" wx:key="index" wx:for-item="caption">
           <view wx:for="{{caption}}" wx:key="index">
 
@@ -46,6 +41,7 @@
         </block>
       </scroll-view>
     </view>
+  </view>
   </view>
 
 </view>
