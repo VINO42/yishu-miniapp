@@ -5,7 +5,8 @@
     "pages/my/my",
     "pages/cities/index",
     "pages/userBookList/userBookList",
-    "pages/login/login"
+    "pages/login/login",
+    "pages/bookDetail/bookDetail"
   ],
   "permission": {
     "scope.userFuzzyLocation": {
@@ -53,7 +54,7 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-panel": "@vant/weapp/panel/index",
     "van-row": "@vant/weapp/row/index",
-
+    "van-card": "@vant/weapp/card/index",
     "van-col": "@vant/weapp/col/index",
     "van-index-bar": "@vant/weapp/index-bar/index",
     "van-index-anchor": "@vant/weapp/index-anchor/index",

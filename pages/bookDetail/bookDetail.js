@@ -1,18 +1,39 @@
-// pages/messageList/messageList.js
+// pages/bookDetail/bookDetail.js
+var constant = require('../../utils/constant');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    book: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    let id = options.id;
+    console.log(options)
 
+    console.log(12332)
+    console.log(id)
+    wx.request({
+      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/getPublishById?id='+id,
+      method: 'GET',
+      header: {
+        'content-type': 'application/json',
+        'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
+      },
+      success: res => {
+        console.log(res.data.data)
+        this.setData({
+          book:res.data.data
+        })
+        console.log( this.data.book)
+
+      }
+    });
   },
 
   /**

@@ -13,7 +13,7 @@ Page({
     query: '',
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isHide: false
+    isHide: true
   },
   inputEvent: function (e) {
     this.setData({
@@ -133,6 +133,7 @@ Page({
  */
 onPullDownRefresh: function () {
   let that = this
+  console.log("onPullDownRefresh")
   that.loadInitData()
 },
 /**
@@ -147,7 +148,7 @@ onReachBottom: function () {
     that.loadMore()
   } else {
     wx.showToast({
-      title: '没有更多数据了',
+      title: '没有更多了',
     })
   }
 },
@@ -166,6 +167,9 @@ searchClick() {
     listArr: [],
     pageCount: 0
   })
+  console.log(1111111111111112)
+  console.log( this.data.regionId)
+
   wx.request({
     method: "POST",
     url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+10,
@@ -340,6 +344,12 @@ searchClick() {
   bindCities: function () {
     wx.navigateTo({
       url: '/pages/cities/index'
+    })
+  },
+  redirectToDetail: function(event){
+    let id=event.currentTarget.id;
+    wx.navigateTo({
+      url: '../bookDetail/bookDetail?id='+id
     })
   }
 })
