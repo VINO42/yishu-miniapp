@@ -47,21 +47,21 @@
   },
   "usingComponents": {
     "van-button": "@vant/weapp/button",
+    "van-toast": "@vant/weapp/toast/index",
     "van-icon": "@vant/weapp/icon",
-    "van-divider": "@vant/weapp/divider/index",
-    "van-search": "@vant/weapp/search/index",
+     "van-search": "@vant/weapp/search/index",
     "van-cell": "@vant/weapp/cell/index",
     "van-cell-group": "@vant/weapp/cell-group/index",
-    "van-panel": "@vant/weapp/panel/index",
-    "van-row": "@vant/weapp/row/index",
+     "van-row": "@vant/weapp/row/index",
     "van-card": "@vant/weapp/card/index",
     "van-col": "@vant/weapp/col/index",
     "van-index-bar": "@vant/weapp/index-bar/index",
     "van-index-anchor": "@vant/weapp/index-anchor/index",
     "van-loading": "@vant/weapp/loading/index",
+    "van-divider": "@vant/weapp/divider/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-field": "@vant/weapp/field/index"
-  },
+     },
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
 }

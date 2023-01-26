@@ -18,45 +18,27 @@
 </view>
 <!-- 首页页面 -->
 <view wx:else>
+  <van-toast id="van-toast" />
 
-  <view>
-    <view>
-      <view class="topView">
-        <van-button type="danger" class="cities" bindtap="bindCities" id='{{regionId}}'>{{regionName}}</van-button>
-
-        <!--     <input class="cities" type="text" bindtap="bindCities" id='{{regionId}}' value="{{regionName}}" /> -->
-        <van-search field-class="searchosition" value="{{ inputval }}" placeholder="请输入书籍或isbn" background='red' bind:blur="inputEvent" bind:search="onSearch" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="onSearch" shape="round">
-          <view slot="action" bind:tap="searchClick">搜索</view>
-        </van-search>
-      </view>
-      <view class="page-section-spacing" style="position:fixed; bottom:0; 750rpx;">
-      <!-- style="height: 900rpx;"  -->
-        <scroll-view class="scrollview" scroll-y="true" 
-        
-        enhanced='true' paging-enabled='true'
-        enable-passive='true'
-          >
-          <block wx:for="{{listArr}}" wx:key="index" wx:for-item="caption">
-            <view wx:for="{{caption}}" wx:key="index">
-              <van-card  
-              id='{{item.id}}'
-              desc-class="van-multi-ellipsis--l3"
-              title="{{item.title}}"  
-              desc='{{item.bookIntro}}'
-              thumb="{{item.pic}}"
-              thumb-link="../bookDetail/bookDetail?id={{item.id}}"
-              bindtap="redirectToDetail" 
-              >
-       
-                <view slot="footer">
-                  <van-cell   icon="{{item.avatar}}" >{{item.nickName}}  发布于 {{item.publishDate}}</van-cell>
-                </view>
-              </van-card>
-            </view>
-          </block>
-        </scroll-view>
-      </view>
-    </view>
+  <view class="topView">
+    <van-cell  custom-class	="cities" bindtap="bindCities"  title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
+     <van-search custom-class="searchosition" value="{{ inputval }}" placeholder="请输入书名或isbn号"  bind:blur="inputEvent" bind:search="onSearch" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="onSearch" shape="round">
+      <view slot="action" bind:tap="searchClick">搜索</view>
+    </van-search>
   </view>
+  <scroll-view class="scrollview" scroll-y="true" bindscroll="scrollTopFun">
+    <block wx:for="{{listArr}}" wx:key="index" wx:for-item="caption">
+      <view wx:for="{{caption}}" wx:key="index">
+        <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}" thumb-link="../bookDetail/bookDetail?id={{item.id}}" bindtap="redirectToDetail">
+
+          <view slot="footer">
+            <van-cell icon="{{item.avatar}}">{{item.nickName}} 发布于 {{item.publishDate}}</van-cell>
+          </view>
+        </van-card>
+        <van-divider  hairline  borderColor="#1989fa"/>
+
+      </view>
+    </block>
+  </scroll-view>
 
 </view>

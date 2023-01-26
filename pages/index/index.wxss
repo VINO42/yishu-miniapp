@@ -9,50 +9,44 @@
 
 .topView {
   display: flex;
-  flex-flow: row nowrap;
-  height: 15;
-  justify-content: space-between;
+  height: 140rpx;
+  width:100%;
+  /* flex-flow: row nowrap; */
+  /* justify-content: space-between; */
   position: fixed;
   top: 0;
+  z-index:999
 }
-
+.cities {
+  font-size: medium;
+  align-items: center;
+  height: 140rpx;
+  width: 100%;
+}
 .searchosition {
-  width: 40%;
-  height: 80rpx;
-  margin-left: 20rpx;
+  width: 100%;
+  height:140rpx;
+  display: flex;
   align-items: right;
   /* flex-wrap: wrap;
   display: flex;
   align-items: center;
   justify-content: flex-end; */
 }
-.cardview{
+
+.cardview {
   color: aqua;
   background-color: aqua;
 }
-.page-section-spacing{
+
+.page-section-spacing {
   margin-top: 140rpx;
 }
-.cities {
-  /* position: fixed; */
-  /* top: 0%; */
-  /* color: #a6a6a6; */
-  /* width: 50%; */
-  font-size: medium;
-  align-items: center;
-  margin-top: 50;
-  height: 40rpx;
-  /* flex-wrap: wrap;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end; */
 
-}
-.scrollview{
-  margin-top: 100rpx;
-  height: 880rpx;
-  position:fixed; 
-  bottom:0; 
+
+
+.scrollview {
+  margin-top: 140rpx;
 }
 
 .header image {

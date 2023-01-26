@@ -1,5 +1,6 @@
 //获取应用实例
 var constant = require('../../utils/constant');
+import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 
 const app = getApp()
 Page({
@@ -13,7 +14,9 @@ Page({
     query: '',
     //判断小程序的API，回调，参数，组件等是否在当前版本可用。
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    isHide: true
+    isHide: true,
+    scrollTop:0,
+
   },
   inputEvent: function (e) {
     this.setData({
@@ -144,6 +147,7 @@ onReachBottom: function () {
     pageIndex = that.data.pageIndex,
     pageCount = that.data.pageCount;
   //当页面小于总页数时加载下页面
+  console.log('当页面小于总页数时加载下页面')
   if (pageIndex < pageCount) {
     that.loadMore()
   } else {
@@ -167,8 +171,7 @@ searchClick() {
     listArr: [],
     pageCount: 0
   })
-  console.log(1111111111111112)
-  console.log( this.data.regionId)
+   console.log( this.data.regionId)
 
   wx.request({
     method: "POST",
@@ -319,7 +322,12 @@ searchClick() {
           console.log(res.data.data);
           wx.setStorageSync(constant.cache_constant.userInfo, res.data.data);
           wx.setStorageSync(constant.cache_constant.userToken, res.data.data.token);
+          console.log("加载中");
 
+          Toast.loading({
+            message: '加载中...',
+            forbidClick: true,
+          });
         }
       });
 
@@ -351,5 +359,39 @@ searchClick() {
     wx.navigateTo({
       url: '../bookDetail/bookDetail?id='+id
     })
+  },
+   //头部固定
+   scrollTopFun(e){
+    let _this = this;
+    let scrollTop = e.detail.scrollTop;
+    _this.setData({
+    scrollTop:scrollTop
+ })
+},
+//监听屏幕滚动 判断上下滚动
+onPageScroll: function (ev) {
+  var _this = this;
+  //当滚动的top值最大或最小时，为什么要做这一步是因为在手机实测小程序的时候会发生滚动条回弹，所以为了处理回弹，设置默认最大最小值
+  if (ev.scrollTop <= 0) {
+   // 滚动到最顶部
+   ev.scrollTop = 0;
+   this.setData({ tabIsTop: false });
+  } else if (ev.scrollTop > wx.getSystemInfoSync().windowHeight) {
+   // 滚动到最底部
+   ev.scrollTop = wx.getSystemInfoSync().windowHeight;
+  }
+  //判断浏览器滚动条上下滚动
+  if (ev.scrollTop > this.data.scrollTop || ev.scrollTop == wx.getSystemInfoSync().windowHeight) {
+   //向下滚动
+   this.setData({ tabIsTop: true });
+  } else {
+   //向上滚动
+  }
+  //给scrollTop重新赋值
+  setTimeout(function () {
+   _this.setData({
+   scrollTop: ev.scrollTop
+   })
+  }, 0)
   }
 })
