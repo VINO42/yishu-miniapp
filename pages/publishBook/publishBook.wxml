@@ -1,16 +1,30 @@
 <view class="container">
   <view>
-    <form bindsubmit="formSubmit" bindreset="formReset" catchsubmit="formSubmit" catchreset="formReset">
-      <van-cell name='regionId' custom-class="cities" bindtap="bindCities" value="{{regionName}}" id="{{regionId}}" arrow-direction="down">
+    <form bindsubmit="formSubmit" bindreset="formSubmit" >
+      <van-cell name='regionId' custom-class="cities" style='align-items: center;' bindtap="bindCities" value="{{regionName}}" id="{{regionId}}" arrow-direction="down">
         <van-icon slot="right-icon" size='50rpx' class-prefix="iconfont icon-weizhi1" class="custom-icon" />
       </van-cell>
-      <input name="regionId" type='input' hidden="true" cursor-spacing='20' value='{{regionId}}' />
+      <input name="regionId" type='input'  data-regionId='{{regionId}}' hidden="true" cursor-spacing='20' value='{{regionId}}' />
+      <input name="regionName" type='input'  data-regionName='{{regionName}}' hidden="true" cursor-spacing='20' value='{{regionName}}' />
       <view>
-
-        <input name="bookTitle" type='input' cursor-spacing='20' class='bookinfo' placeholder='请输入书籍名或ISBN码' />
+        <block wx:for="{{conLists}}" wx:key="index">
+          <van-divider  hairline  borderColor="#1989fa"/>
+          <view class='template_title_list flex-x'>
+            <view class="del" bindtap='del' data-index='{{index}}'>-移除</view>
+            <input bindinput='changeConTitle' data-index='{{index}}' data-isbn='{{isbn}}' cursor-spacing='20' class='bookinfo' placeholder='请输入书籍ISBN码' />
+            <input bindinput='changeRemark' data-index='{{index}}' data-remark='{{remark}}' cursor-spacing='20' class='remark' placeholder='请输入备注' />
+          </view>
+        </block>
       </view>
-
-      <button size='default' style='border-color: #BD3124;' form-type="submit" plain class="subButtom">发布</button>
+      <view class='template_title flex-x' bindtap='add' class="contract">
+        <view class='add_con flex-x'>
+          <text>+添加书籍</text>
+         </view>
+      </view>
+      <view>
+        <input name='contract' bindinput='changeContract'  value='{{contract}}' bindinput='changeContract' cursor-spacing='20' class='contract' placeholder='请输入联系方式' />
+      </view>
+      <button size='default' style='border-color: #BD3124;' form-type="reset" plain class="subButtom">发布</button>
     </form>
   </view>
 </view>

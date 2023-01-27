@@ -1,4 +1,9 @@
 // app.js
+globalData: {
+  regionId:null;
+  regionName: "全国";
+  publish:null
+}
 App({
   onLaunch() {
     // 展示本地存储能力

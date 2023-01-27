@@ -204,14 +204,30 @@ searchClick() {
   }
   )
 },
+onShow: function () {
+  let regionId = app.globalData.regionId;
+  let regionName = app.globalData.regionName;
+  console.log(1111111111)
+  this.setData({
+    regionId:regionId,
+    regionName:regionName
+  });
+  this.loadInitData();
+},
   onLoad: function (opions) {
-    console.log(5555555555)
-
+  
     console.log(opions.regionId)
     if(opions.regionId){
       console.log(666666666666)
       this.loadInitData();
     }
+    // if(globalRegionId){
+    //   console.log('获取到switch传参：'+regionId)
+    //   wx.setNavigationBarTitle({
+    //     regionId: globalRegionId,
+    //     regionName:globalRegionName
+    // })
+    // }
     //获取模糊地理位置
     wx.getFuzzyLocation({
       type: 'wgs84',

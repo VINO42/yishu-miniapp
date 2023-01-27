@@ -1,4 +1,5 @@
 var constant = require('../../utils/constant');
+const app=getApp()  
 
 // pages/cities.js
 Page({
@@ -89,7 +90,9 @@ Page({
     //给上个页面赋值
     prevPage.setData({ regionId: id })
     prevPage.setData({ regionName: name })
-    
+    app.globalData.regionId=id;
+    app.globalData.regionName=name;
+
     prevPage.setData({ listArr: [] })
     console.log(prevPage)
     if(prevPage.route==='pages/index/index'){

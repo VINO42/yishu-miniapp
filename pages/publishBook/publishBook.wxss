@@ -14,5 +14,51 @@
   border-color: #BD3124;
 }
 .bookinfo{
-  margin-bottom: 80rpx;
+  margin-bottom: 60rpx;
+}
+.remark{
+  margin-bottom: 60rpx;
+}
+.contract{
+  margin-bottom: 60rpx;
+}
+.add_con > text {
+  font-size: 40rpx;
+  color: #f16765;
+  display: block;
+  margin-right: 10rpx;
+  margin-left: 5rpx;
+  line-height: 44rpx;
+}
+
+.template_title {
+  background: none;
+  border-bottom: 60rpx;
+}
+.add_con > text {
+  font-size: 40rpx;
+  color: #f16765;
+  display: block;
+  margin-right: 20rpx;
+  margin-left: 10rpx;
+  line-height: 44rpx;
+}
+
+.add_con > view {
+  font-size: 32rpx;
+  color: #7885cb;
+}
+.template_title_list {
+  margin-bottom: 4rpx;
+}
+.flex-x {
+  align-items: center;
+}
+ /* 删除内容 */
+ 
+ .del {
+  font-size: 32rpx;
+  color: #f16765;
+  margin-right: 14rpx;
+  padding: 20rpx;
 }
