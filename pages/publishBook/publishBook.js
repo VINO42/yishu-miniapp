@@ -1,11 +1,12 @@
 // pages/publishBook.js
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
-
+    regionName: "请选择城市",
+    regionId: "",
+    bookTitle:""
   },
 
   /**
@@ -62,5 +63,16 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  bindCities: function () {
+    wx.navigateTo({
+      url: '/pages/cities/index'
+    })
+  },
+  formSubmit: function (e) {
+    console.log('form发生了submit1事件，携带数据为：', e.detail.value)
+  },
+  publishBook: function (e) {
+    console.log('form发生了submit2事件，携带数据为：', e)
+  },
 })

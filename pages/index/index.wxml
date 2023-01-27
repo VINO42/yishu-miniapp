@@ -21,7 +21,7 @@
   <van-toast id="van-toast" />
 
   <view class="topView">
-    <van-cell  custom-class	="cities" bindtap="bindCities"  title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
+    <van-cell  custom-class	="cities iconfont icon-weizhi1" bindtap="bindCities"  title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
      <van-search custom-class="searchosition" value="{{ inputval }}" placeholder="请输入书名或isbn号"  bind:blur="inputEvent" bind:search="onSearch" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="onSearch" shape="round">
       <view slot="action" bind:tap="searchClick">搜索</view>
     </van-search>

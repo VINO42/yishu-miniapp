@@ -91,10 +91,18 @@ Page({
     prevPage.setData({ regionName: name })
     
     prevPage.setData({ listArr: [] })
-    prevPage.loadInitData();
-    wx.navigateBack({
-      delta: 1,
-    })
+    console.log(prevPage)
+    if(prevPage.route==='pages/index/index'){
+      prevPage.loadInitData();
+      wx.navigateBack({
+        delta: 1,
+      })
+    }else{
+      wx.navigateBack({
+        delta: 1,
+      })
+    }
+  
   },
 
 

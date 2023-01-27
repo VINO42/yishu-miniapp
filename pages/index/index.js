@@ -1,4 +1,4 @@
-//获取应用实例
+//获取应用实例 BD3124
 var constant = require('../../utils/constant');
 import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 

@@ -1,2 +1,16 @@
-<!--pages/publishBook.wxml-->
-<text>pages/publishBook.wxml</text>
+<view class="container">
+  <view>
+    <form bindsubmit="formSubmit" bindreset="formReset" catchsubmit="formSubmit" catchreset="formReset">
+      <van-cell name='regionId' custom-class="cities" bindtap="bindCities" value="{{regionName}}" id="{{regionId}}" arrow-direction="down">
+        <van-icon slot="right-icon" size='50rpx' class-prefix="iconfont icon-weizhi1" class="custom-icon" />
+      </van-cell>
+      <input name="regionId" type='input' hidden="true" cursor-spacing='20' value='{{regionId}}' />
+      <view>
+
+        <input name="bookTitle" type='input' cursor-spacing='20' class='bookinfo' placeholder='请输入书籍名或ISBN码' />
+      </view>
+
+      <button size='default' style='border-color: #BD3124;' form-type="submit" plain class="subButtom">发布</button>
+    </form>
+  </view>
+</view>

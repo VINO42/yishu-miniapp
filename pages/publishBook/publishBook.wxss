@@ -1,1 +1,18 @@
 /* pages/publishBook.wxss */
+.cities {
+  font-size: large;
+  align-items: center;
+  height: 140rpx;
+  width: 100%;
+  color:#BD3124;
+  margin-bottom: 20rpx
+}
+.subButtom{
+  font-size: medium;
+  margin-bottom: auto;
+  align-items: center;
+  border-color: #BD3124;
+}
+.bookinfo{
+  margin-bottom: 80rpx;
+}
