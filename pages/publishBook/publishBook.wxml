@@ -1,6 +1,6 @@
 <view class="container">
   <view>
-    <form bindsubmit="formSubmit" bindreset="formSubmit" >
+    <form bindreset="formSubmit" >
       <van-cell name='regionId' custom-class="cities" style='align-items: center;' bindtap="bindCities" value="{{regionName}}" id="{{regionId}}" arrow-direction="down">
         <van-icon slot="right-icon" size='50rpx' class-prefix="iconfont icon-weizhi1" class="custom-icon" />
       </van-cell>
@@ -10,15 +10,15 @@
         <block wx:for="{{conLists}}" wx:key="index">
           <van-divider  hairline  borderColor="#1989fa"/>
           <view class='template_title_list flex-x'>
-            <view class="del" bindtap='del' data-index='{{index}}'>-移除</view>
+            <view class="del" bindtap='del' data-index='{{index}}'>一 移除</view>
             <input bindinput='changeConTitle' data-index='{{index}}' data-isbn='{{isbn}}' cursor-spacing='20' class='bookinfo' placeholder='请输入书籍ISBN码' />
-            <input bindinput='changeRemark' data-index='{{index}}' data-remark='{{remark}}' cursor-spacing='20' class='remark' placeholder='请输入备注' />
+            <input bindinput='changeRemark' data-index='{{index}}' data-remark='{{remark}}' cursor-spacing='20' class='remark' placeholder='请输入发布备注' />
           </view>
         </block>
       </view>
       <view class='template_title flex-x' bindtap='add' class="contract">
         <view class='add_con flex-x'>
-          <text>+添加书籍</text>
+          <text>＋ 添加书籍</text>
          </view>
       </view>
       <view>

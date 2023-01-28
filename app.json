@@ -39,7 +39,7 @@
       },
       {
         "pagePath": "pages/my/my",
-        "text": "我的",
+        "text": "我的发布",
         "iconPath": "images/mine.png",
         "selectedIconPath": "images/mine.png"
       }

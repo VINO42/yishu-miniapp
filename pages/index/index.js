@@ -54,20 +54,16 @@ Page({
       success: function (res) {
         // var data = JSON.parse(Dec.Decrypt(res.data));
         var data= res.data.data;
-        console.log(1111111111)
-
-        console.log(data)
-        var tempList = res.data.data.records;
+ 
+         var tempList = res.data.data.records;
         that.setData({
           pageCount: Math.ceil(data.total / 10),
           pageIndex: 1,
           ['listArr[' + (pageIndex - 1) + ']']: tempList  //动态修改数组某一项的值，需要加中括号
         })
-        // console.log(that.data.listArr)
-      },
+       },
       fail: function (res) {
-        console.log(11223)
-        wx.showLoading({
+         wx.showLoading({
           title: '加载失败...',
         })
       },
@@ -85,7 +81,7 @@ Page({
     wx.showLoading({
       title: '加载第' + pageIndex + '页',
     })
-    console.log(that.data.query)
+
     wx.request({
       url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+10,
       data: {
@@ -106,7 +102,7 @@ Page({
           pageIndex: pageIndex,
           ['listArr[' + (pageIndex - 1) + ']']: newList
         })
-        // console.log(that.data.listArr)
+
       },
       fail: function (res) { },
       complete: function (res) {
@@ -121,10 +117,10 @@ Page({
 */
   searchEvent: function (e) {
     if (this.data.recipeInfo.length == 0 || this.data.recipeInfo.length == 0) {
-      console.log("aaa")
-    } else {
-      // console.log(this.data.recipeInfo)
 
+    } else {
+
+      
       this.setData({
         recipeInfo: '用户名：' + this.data.userN,
         passWd: '密码：' + this.data.passW
@@ -136,7 +132,7 @@ Page({
  */
 onPullDownRefresh: function () {
   let that = this
-  console.log("onPullDownRefresh")
+
   that.loadInitData()
 },
 /**
@@ -147,8 +143,7 @@ onReachBottom: function () {
     pageIndex = that.data.pageIndex,
     pageCount = that.data.pageCount;
   //当页面小于总页数时加载下页面
-  console.log('当页面小于总页数时加载下页面')
-  if (pageIndex < pageCount) {
+   if (pageIndex < pageCount) {
     that.loadMore()
   } else {
     wx.showToast({
@@ -163,16 +158,16 @@ onSearch() {
 searchClick() {
   var _this = this;
   var pageIndex = 1;
-  console.log("searchclick1")
 
+  
 
 
   _this.setData({
     listArr: [],
     pageCount: 0
   })
-   console.log( this.data.regionId)
 
+  
   wx.request({
     method: "POST",
     url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current='+pageIndex+'&size='+10,
@@ -187,8 +182,8 @@ searchClick() {
     },
     success: function (res) {
       var data = res.data.data;
-      console.log(data)
 
+      
       let newList = data.records;
       _this.setData({
         pageIndex: pageIndex,
@@ -207,7 +202,7 @@ searchClick() {
 onShow: function () {
   let regionId = app.globalData.regionId;
   let regionName = app.globalData.regionName;
-  console.log(1111111111)
+
   this.setData({
     regionId:regionId,
     regionName:regionName
@@ -216,9 +211,9 @@ onShow: function () {
 },
   onLoad: function (opions) {
   
-    console.log(opions.regionId)
+
     if(opions.regionId){
-      console.log(666666666666)
+
       this.loadInitData();
     }
     // if(globalRegionId){
@@ -244,8 +239,8 @@ onShow: function () {
           },
           success: res => {
             // geo
-            console.log("geo结果");
-            console.log(res.data.data);
+
+
             wx.setStorageSync(constant.cache_constant.userRegionId, res.data.data.id);
             wx.setStorageSync(constant.cache_constant.userRegionName, res.data.data.name);
 
@@ -268,7 +263,7 @@ onShow: function () {
                     url: 'http://127.0.0.1:8888/wechat/miniapp/sessionInfo/wx65f894b2e37bed7e' + '?jscode=' + res.code,
                     success: res => {
                       // 获取到用户的 openid    
-                      console.log(res.data.data.openid)
+
                       wx.setStorageSync(constant.cache_constant.userOpenId, res.data.data.openid);
                       wx.setStorageSync(constant.cache_constant.userUnionId, res.data.data.unionid);
                       
@@ -302,9 +297,7 @@ onShow: function () {
   onReady: function(options){
     this.data.regionId=wx.getStorageSync(constant.cache_constant.userRegionId);
     this.data.regionName=wx.getStorageSync(constant.cache_constant.userRegionName);
-    console.log(2332)
-    console.log(this.data.regionId);
-    console.log(this.data.regionName);
+
 
   },
   // 获取用户信息
@@ -334,12 +327,12 @@ onShow: function () {
 
         success: res => {
           // 登录
-          console.log("登录结果");
-          console.log(res.data.data);
+
+          
           wx.setStorageSync(constant.cache_constant.userInfo, res.data.data);
           wx.setStorageSync(constant.cache_constant.userToken, res.data.data.token);
-          console.log("加载中");
 
+          
           Toast.loading({
             message: '加载中...',
             forbidClick: true,

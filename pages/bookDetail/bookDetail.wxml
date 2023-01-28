@@ -1,7 +1,10 @@
 <view>
   <van-card desc="{{book.bookIntro}}" title="{{book.title}}" thumb="{{book.pic}}">
     <view slot="footer">
-      <van-cell size="middle" icon="{{book.avatar}}" >{{book.nickName}} 于 {{book.publishDate}} 发布
+    <van-divider  hairline  borderColor="#999966"/>
+      <text >{{book.regionName}}</text>
+      <van-cell size="middle" icon="{{book.avatar}}" >
+        {{book.nickName}} 于 {{book.dayBefor}} 发布
       </van-cell>
       <van-cell size="middle">备注信息：{{book.remark}}</van-cell>
       <van-cell size="middle">联系方式：{{book.contract}}</van-cell>
