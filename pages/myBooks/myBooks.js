@@ -197,7 +197,6 @@ Page({
             'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
           },
           success: res => {
-            console.log(res.data.data)
             this.onLoad()
           }
         });
