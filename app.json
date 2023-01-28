@@ -3,8 +3,8 @@
     "pages/index/index",
     "pages/publishBook/publishBook",
     "pages/my/my",
+    "pages/myBooks/myBooks",
     "pages/cities/index",
-    "pages/userBookList/userBookList",
     "pages/login/login",
     "pages/bookDetail/bookDetail"
   ],
@@ -38,7 +38,7 @@
         "selectedIconPath": "images/upload.png"
       },
       {
-        "pagePath": "pages/my/my",
+        "pagePath": "pages/myBooks/myBooks",
         "text": "我的发布",
         "iconPath": "images/mine.png",
         "selectedIconPath": "images/mine.png"

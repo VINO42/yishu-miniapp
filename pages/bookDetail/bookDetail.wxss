@@ -1,1 +1,11 @@
 /* pages/bookDetail/bookDetail.wxss */
+.mine_headicon{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  align-items: right;
+  margin-left: 50rpx;
+}
+.pub_class{
+
+}

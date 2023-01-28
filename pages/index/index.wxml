@@ -21,8 +21,11 @@
   <van-toast id="van-toast" />
 
   <view class="topView">
-    <van-cell  custom-class	="cities iconfont icon-weizhi1" bindtap="bindCities"  title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
-     <van-search custom-class="searchosition" value="{{ inputval }}" placeholder="请输入书名或isbn号"  bind:blur="inputEvent" bind:search="onSearch" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="onSearch" shape="round">
+    <van-cell custom-class="cities iconfont icon-weizhi1" bindtap="bindCities" title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
+    <van-search custom-class="searchosition" value="{{ inputval }}" placeholder="请输入书名或isbn号"   input-align="left" use-action-slot show-action 
+    bind:blur="inputEvent" 
+    bind:search="searchClick" 
+    shape="round">
       <view slot="action" bind:tap="searchClick">搜索</view>
     </van-search>
   </view>
@@ -30,14 +33,16 @@
     <block wx:for="{{listArr}}" wx:key="index" wx:for-item="caption">
       <view wx:for="{{caption}}" wx:key="index">
         <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}" thumb-link="../bookDetail/bookDetail?id={{item.id}}" bindtap="redirectToDetail">
-
           <view slot="footer">
-            <van-divider  hairline  borderColor="#999966" />
-            <text >{{item.regionName}}</text>
-            <van-cell icon="{{item.avatar}}" value="{{item.nickName}} 于 {{item.dayBefor}} 发布"></van-cell>
+            <van-divider hairline borderColor="#999966" />
+            <text>{{item.regionName}}</text>
+            <van-cell  >
+              <image class='mine_headicon' src='{{item.avatar}}' slot="icon"></image>
+              <van-cell class='pub_class' value="{{item.nickName}} 于 {{item.dayBefor}} 发布"></van-cell>
+            </van-cell>
           </view>
         </van-card>
-        <van-divider  hairline  borderColor="#BD3124"/>
+        <van-divider  borderColor="#BD3124" />
 
       </view>
     </block>

@@ -22,6 +22,7 @@ Page({
     this.setData({
       query: e.detail.value
     })
+    this.searchClick()
   },
   /**
      * 初始化数据

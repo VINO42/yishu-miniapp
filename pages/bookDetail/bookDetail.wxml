@@ -1,13 +1,16 @@
 <view>
   <van-card desc="{{book.bookIntro}}" title="{{book.title}}" thumb="{{book.pic}}">
     <view slot="footer">
-    <van-divider  hairline  borderColor="#999966"/>
-      <text >{{book.regionName}}</text>
-      <van-cell size="middle" icon="{{book.avatar}}" >
-        {{book.nickName}} 于 {{book.dayBefor}} 发布
-      </van-cell>
-      <van-cell size="middle">备注信息：{{book.remark}}</van-cell>
-      <van-cell size="middle">联系方式：{{book.contract}}</van-cell>
-    </view>
-  </van-card>
+      <van-divider hairline borderColor="#BD3124" />
+      <text>{{book.regionName}}</text>
+      <view slot="footer">
+        <van-cell>
+          <image class='mine_headicon' src='{{book.avatar}}' slot="icon"></image>
+          <van-cell class='pub_class' value="{{book.nickName}} 于 {{book.dayBefor}} 发布"></van-cell>
+          <van-cell size="middle">备注信息：{{book.remark}}</van-cell>
+          <van-cell size="middle">联系方式：{{book.contract}}</van-cell>
+        </van-cell>
+      </view>
+ </view>
+</van-card>
 </view>
