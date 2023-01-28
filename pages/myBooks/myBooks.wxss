@@ -1,5 +1,5 @@
 .scrollview {
-  margin-top: 0rpx;
+  margin-top: 20rpx;
 }
 .pub_class{
 
@@ -7,7 +7,6 @@
 .delete{
   width: 80rpx;
   height: 80rpx;
-  border-radius: 50%;
-  align-items: left;
-  margin-right: 50rpx;
+  align-items: right;
+  margin-left: 300rpx;
 }

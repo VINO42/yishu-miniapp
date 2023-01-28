@@ -12,9 +12,11 @@
             <van-cell class='pub_class' value="{{item.publishDate}} 发布"></van-cell>
           </view>
         </van-card>
-        <view >
-          <van-icon  class-prefix="delete"   size='85rpx' data-id='{{item.id}}' name='https://pic2.58cdn.com.cn/nowater/webim/big/n_v29d4c511415b14889ad14f24d4368eb9d.png' bind:click='deleteMyPublishedBook' />
-        </view>
+        <van-cell  bind:click='deleteMyPublishedBook' >
+          <!-- <van-icon  class-prefix="delete"   size='85rpx' data-id='{{item.id}}' name='https://pic2.58cdn.com.cn/nowater/webim/big/n_v29d4c511415b14889ad14f24d4368eb9d.png' bind:click='deleteMyPublishedBook' /> -->
+          <image class='delete' src='https://pic2.58cdn.com.cn/nowater/webim/big/n_v29d4c511415b14889ad14f24d4368eb9d.png' slot="icon"></image>
+        </van-cell>
+
         <van-divider borderColor="#BD3124" />
       </view>
     </block>
