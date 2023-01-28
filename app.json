@@ -60,7 +60,9 @@
     "van-loading": "@vant/weapp/loading/index",
     "van-divider": "@vant/weapp/divider/index",
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
-    "van-field": "@vant/weapp/field/index"
+    "van-field": "@vant/weapp/field/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+
      },
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"

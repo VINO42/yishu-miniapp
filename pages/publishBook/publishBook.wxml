@@ -2,13 +2,13 @@
   <view>
     <form bindreset="formSubmit" >
       <van-cell name='regionId' custom-class="cities" style='align-items: center;' bindtap="bindCities" value="{{regionName}}" id="{{regionId}}" arrow-direction="down">
-        <van-icon slot="right-icon" size='50rpx' class-prefix="iconfont icon-weizhi1" class="custom-icon" />
+        <van-icon slot="right-icon" size='80rpx' name='https://pic2.58cdn.com.cn/nowater/webim/big/n_v271448697c7194992a90c8033a6cb549d.png' />
       </van-cell>
       <input name="regionId" type='input'  data-regionId='{{regionId}}' hidden="true" cursor-spacing='20' value='{{regionId}}' />
       <input name="regionName" type='input'  data-regionName='{{regionName}}' hidden="true" cursor-spacing='20' value='{{regionName}}' />
       <view>
         <block wx:for="{{conLists}}" wx:key="index">
-          <van-divider  hairline  borderColor="#1989fa"/>
+          <van-divider  borderColor="#BD3124" />
           <view class='template_title_list flex-x'>
             <view class="del" bindtap='del' data-index='{{index}}'>一 移除</view>
             <input bindinput='changeConTitle' data-index='{{index}}' data-isbn='{{isbn}}' cursor-spacing='20' class='bookinfo' placeholder='请输入书籍ISBN码' />

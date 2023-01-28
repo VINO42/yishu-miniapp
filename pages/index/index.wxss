@@ -36,7 +36,7 @@
   font-size: medium;
   align-items: center;
   height: 140rpx;
-  width: 100%;
+  width: 40%;
 }
 .searchosition {
   width: 100%;

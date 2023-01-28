@@ -1,6 +1,7 @@
 .scrollview {
-  margin-top: 140rpx;
+  margin-top: 0rpx;
 }
 .pub_class{
 
 }
+ 

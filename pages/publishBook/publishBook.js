@@ -1,6 +1,5 @@
 // pages/publishBook.js
 var constant = require('../../utils/constant');
-import Toast from '../../miniprogram_npm/@vant/weapp/toast/toast';
 const app = getApp()
 
 Page({
@@ -135,10 +134,17 @@ Page({
     wx.showLoading({
       title: '发布中...',
     })
- 
+
     var regionId = wx.getStorageSync(constant.cache_constant.userRegionId);
     var regionName = wx.getStorageSync(constant.cache_constant.userRegionName);
     var _conLists = this.data.conLists;
+    if (_conLists.length == 0) {
+      wx.showToast({
+        title: '请添加书籍',
+        icon: 'none'
+      })
+      return;
+    }
     for (let i = 0; i < _conLists.length; i++) {
       if (!_conLists[i].isbn) {
         wx.showToast({
@@ -200,7 +206,7 @@ Page({
           url: '/pages/index/index',
         })
       },
-    })   
+    })
   },
   add(e) {
     // 点击添加按钮，就往数组里添加一条空数据

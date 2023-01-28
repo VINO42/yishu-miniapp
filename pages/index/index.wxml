@@ -21,8 +21,8 @@
   <van-toast id="van-toast" />
 
   <view class="topView">
-    <van-cell custom-class="cities iconfont icon-weizhi1" bindtap="bindCities" title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
-    <van-search custom-class="searchosition" value="{{ inputval }}" placeholder="请输入书名或isbn号"   input-align="left" use-action-slot show-action 
+    <van-cell class="cities" icon='https://pic2.58cdn.com.cn/nowater/webim/big/n_v271448697c7194992a90c8033a6cb549d.png' bindtap="bindCities" title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
+    <van-search custom-class="searchosition" value="{{ inputval }}" placeholder="请输入书名或ISBN码"   input-align="left" use-action-slot show-action 
     bind:blur="inputEvent" 
     bind:search="searchClick" 
     shape="round">
