@@ -9,8 +9,7 @@ Page({
     pageIndex: 1,    //展示的当前页码
     pageSize: 40,   //每页加载的数据量（使用的json数据就是40条，实际工作根据需求来）
     pageCount: 3,    //总页数(假设的，实际应该是根据后台返回的数据)
-    scrollTop: 0,
-    id:null
+    scrollTop: 0
   },
   /**
      * 初始化数据
@@ -184,23 +183,27 @@ Page({
   deleteMyPublishedBook(e) {
     console.log("deleted")
     var _id = e.currentTarget.dataset.id;
-    Dialog.alert({
+    Dialog.confirm({
+      title: '删除',
       message: '确定删除该图书发布?',
-      theme: 'round-button',
-    }).then(() => {
-      // on close
-      wx.request({
-        url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/delete?id='+_id,
-        method: 'POST',
-        header: {
-          'content-type': 'application/json',
-          'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
-        },
-        success: res => {
-          console.log(res.data.data)
-          this.onLoad()  
-        }
+    })
+      .then(() => {
+        // on confirm
+        wx.request({
+          url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/delete?id=' + _id,
+          method: 'POST',
+          header: {
+            'content-type': 'application/json',
+            'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
+          },
+          success: res => {
+            console.log(res.data.data)
+            this.onLoad()
+          }
+        });
+      })
+      .catch(() => {
+        // on cancel
       });
-    });
   }
 })
