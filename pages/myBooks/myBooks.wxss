@@ -8,5 +8,5 @@
   width: 80rpx;
   height: 80rpx;
   align-items: right;
-  margin-left: 300rpx;
+  margin-left: 600rpx;
 }
