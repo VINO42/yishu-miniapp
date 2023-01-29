@@ -1,28 +1,44 @@
 /* pages/publishBook.wxss */
-.cities {
-  font-size: large;
+
+
+.top_class {
+  font-size: medium;
   align-items: center;
-  height: 140rpx;
-  width: 100%;
-  color:#BD3124;
-  margin-bottom: 20rpx
+  color: #BD3124;
+  margin-left: 55rpx;
+  margin-bottom: 30rpx;
+  padding-left: 30rpx;
 }
-.subButtom{
+
+.subButtom {
   font-size: medium;
   margin-bottom: auto;
   align-items: center;
   border-color: #BD3124;
 }
-.bookinfo{
+
+.bookinfo {
   margin-bottom: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.remark{
+
+.remark {
   margin-bottom: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.contract{
+
+.contract {
   margin-bottom: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.add_con > text {
+
+.add_con>text {
   font-size: 40rpx;
   color: #f16765;
   display: block;
@@ -35,7 +51,8 @@
   background: none;
   border-bottom: 60rpx;
 }
-.add_con > text {
+
+.add_con>text {
   font-size: 40rpx;
   color: #f16765;
   display: block;
@@ -44,21 +61,39 @@
   line-height: 44rpx;
 }
 
-.add_con > view {
+.add_con>view {
   font-size: 32rpx;
   color: #7885cb;
 }
+
 .template_title_list {
   margin-bottom: 4rpx;
+  align-items: center;
 }
+
 .flex-x {
   align-items: center;
 }
- /* 删除内容 */
- 
- .del {
+
+/* 删除内容 */
+
+.del {
+  align-items: center;
   font-size: 32rpx;
   color: #f16765;
-  margin-right: 14rpx;
-  padding: 20rpx;
+  border-bottom: 60rpx;
+
+}
+
+.del_con>text {
+  font-size: 35rpx;
+  color: #f16765;
+  display: block;
+  line-height: 44rpx;
+  padding-bottom: 32rpx;
+}
+
+.label_class {
+  align-items: center;
+  padding-left: 70rpx;
 }

@@ -18,14 +18,14 @@
   z-index:999
 }
 .mine_headicon{
-  width: 80rpx;
-  height: 80rpx;
+  width: 60rpx;
+  height: 60rpx;
   border-radius: 50%;
   align-items: right;
   margin-left: 50rpx;
 }
 .pub_class{
-
+  align-items: left;
 }
 .divideClass{
   background: #E0E3DA;

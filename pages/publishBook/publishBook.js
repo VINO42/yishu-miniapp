@@ -14,22 +14,13 @@ Page({
   },
 
   onShow: function () {
-
     let value = app.globalData.publish;
     //返回的时候不清空数据
     if (value) {
       //清空数据
-      this.setData({
-        regionId: wx.getStorageSync(constant.cache_constant.userRegionId),
-        regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
-        contract: "",
-        conLists: [{
-          isbn: '',
-          remark: ''
-        }]
-      })
-      console.log('publish:', value)
+      this.resetData();
     }
+    app.globalData.publish = 0;
   },
 
   /**
@@ -37,14 +28,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      regionId: wx.getStorageSync(constant.cache_constant.userRegionId),
       regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
-      contract: "",
-      conLists: [{
-        isbn: '',
-        remark: ''
-      }]
+      regionId: wx.getStorageSync(constant.cache_constant.userRegionId)
     })
+
   },
 
   /**
@@ -54,28 +41,13 @@ Page({
 
   },
 
-  // formReset: function () {
-  //   console.log('form发生了reset事件')
-  //   this.setData({
-  //     regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
-  //     regionId: wx.getStorageSync(constant.cache_constant.userRegionId),
-  //     contract: "",
-  //     conLists: [{
-  //       isbn: '',
-  //       remark: ''
-  //     }]
-  //   })
-  // },
 
   resetData: function () {
     this.setData({
       regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
       regionId: wx.getStorageSync(constant.cache_constant.userRegionId),
       contract: "",
-      conLists: [{
-        isbn: '',
-        remark: ''
-      }]
+      conLists: []
     })
   },
 
@@ -169,8 +141,7 @@ Page({
       },
       method: 'POST',
       success: function (res) {
-
-        if (res.data.status !== 0) {
+        if (res.data.status !== 200000) {
           wx.showToast({
             title: res.data.message,
             icon: 'none',
@@ -184,12 +155,22 @@ Page({
         // 提交成功设置为初始值
       },
       fail: function (res) {
-        console.log(11223)
         wx.showLoading({
           title: '加载失败...',
         })
       },
       complete: function (res) {
+        if (res.data.status !== 200000) {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            duration: 2000
+          })
+          return;
+        }
+        app.globalData.regionId = regionId;
+        app.globalData.regionName = regionName;
+        app.globalData.publish = 1;
         setTimeout(function () {
           wx.hideLoading()
         }, 3000)
@@ -208,6 +189,10 @@ Page({
       },
     })
   },
+  /**
+   * 添加书籍事件
+   * @param {*} e 
+   */
   add(e) {
     // 点击添加按钮，就往数组里添加一条空数据
     var _list = this.data.conLists;
@@ -242,22 +227,15 @@ Page({
    */
   changeConTitle(e) {
     var idx = e.currentTarget.dataset.index; //当前下标
-    console.log('changeConTitle当前下标' + idx)
-    console.log(e.currentTarget.dataset)
 
     var val = e.detail.value; //当前输入的值
-    console.log('inputValue')
-    console.log(val)
+
 
 
     var _list = this.data.conLists; //data中存放的数据
 
     for (let i = 0; i < _list.length; i++) {
       if (idx == i) {
-        console.log(i)
-
-        console.log(_list[i].isbn)
-
         _list[i].isbn = val   //将当前输入的值放到数组中对应的位置
       }
     }
@@ -265,6 +243,10 @@ Page({
       conLists: _list
     })
   },
+  /**
+   * 修改备注事件
+   * @param {*} e 
+   */
   changeRemark(e) {
     var idx = e.currentTarget.dataset.index; //当前下标
     var val = e.detail.value; //当前输入的值
