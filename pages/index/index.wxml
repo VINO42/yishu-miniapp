@@ -32,10 +32,10 @@
         <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}" thumb-link="../bookDetail/bookDetail?id={{item.id}}" bindtap="redirectToDetail">
           <view slot="footer">
             <van-divider hairline borderColor="#999966" />
-            <view  style="align-items: right;margin-right: 10rpx; padding-top: 10rpx;">
+            <view  style="align-items: right;margin-right: 5rpx; padding-top: 10rpx;">
               <text>{{item.regionName}}</text>
             </view>
-            <view style="align-items: right;margin-right: 10rpx; padding-top: 20rpx;">
+            <view style="align-items: right;margin-right: 5rpx; padding-top: 20rpx;">
               <image class='mine_headicon' src='{{item.avatar}}' slot="icon"></image>
               <text class='pub_class' value="">{{item.nickName}} 于 {{item.dayBefor}} 发布</text>
             </view>
