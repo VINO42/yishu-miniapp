@@ -2,7 +2,8 @@
   margin-top: 20rpx;
 }
 .pub_class{
-
+  align-items: right;
+  align-items: right;
 }
 .delete{
   width: 80rpx;

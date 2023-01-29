@@ -14,10 +14,6 @@ Page({
    */
   onLoad(options) {
     let id = options.id;
-    console.log(options)
-
-    console.log(12332)
-    console.log(id)
     wx.request({
       url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/getPublishById?id='+id,
       method: 'GET',
@@ -61,7 +57,9 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload() {
-
+    this.setData({
+      book:{}
+    })
   },
 
   /**

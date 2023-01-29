@@ -8,8 +8,8 @@
         <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}" thumb-link="../bookDetail/bookDetail?id={{item.id}}" bindtap="redirectToDetail">
           <view slot="footer">
             <van-divider hairline borderColor="#999966" />
-            <text>{{item.regionName}}</text>
-            <van-cell class='pub_class' value="{{item.publishDate}} 发布"></van-cell>
+            <text style="align-items: right;margin-right: 38rpx;">{{item.regionName}}</text>
+            <van-cell style="align-items: right;margin-right: 100rpx;" value="{{item.publishDate}} 发布"></van-cell>
           </view>
         </van-card>
         <van-cell bind:click='deleteMyPublishedBook' data-id='{{item.id}}'>

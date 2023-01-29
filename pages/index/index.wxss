@@ -22,10 +22,11 @@
   height: 60rpx;
   border-radius: 50%;
   align-items: right;
-  margin-left: 50rpx;
+  /* margin-left: 10rpx;
+  padding-left: 20rpx; */
 }
 .pub_class{
-  align-items: left;
+  align-items: right;
 }
 .divideClass{
   background: #E0E3DA;
