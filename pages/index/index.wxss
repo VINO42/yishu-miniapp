@@ -37,7 +37,7 @@
   font-size: medium;
   align-items: center;
   height: 140rpx;
-  width: 40%;
+  width: 50%;
 }
 .van-ellipsis {
   overflow: hidden;
@@ -45,8 +45,8 @@
   text-overflow: ellipsis;
 }
 .searchosition {
-  width: 100%;
-  height:140rpx;
+  width: 120%;
+  height:80rpx;
   display: flex;
   align-items: right;
   /* flex-wrap: wrap;
@@ -54,7 +54,16 @@
   align-items: center;
   justify-content: flex-end; */
 }
-
+.searchFooosition {
+  width: 120%;
+  height:80rpx;
+  display: flex;
+  align-items: right;
+  /* flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; */
+}
 .cardview {
   color: aqua;
   background-color: aqua;

@@ -22,7 +22,7 @@
 
   <view class="topView">
     <van-cell class="cities van-ellipsis" icon='https://pic2.58cdn.com.cn/nowater/webim/big/n_v271448697c7194992a90c8033a6cb549d.png' bindtap="bindCities" title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
-    <van-search custom-class="searchosition" value="{{ inputval }}" placeholder="请输入书名或ISBN码" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="searchClick" bind:clear	="searchClearClick" shape="round">
+    <van-search field-class="searchosition"  custom-class="searchFooosition" value="{{ inputval }}" placeholder="请输入书名或ISBN码" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="searchClick" bind:clear	="searchClearClick" shape="round">
       <view slot="action" bind:tap="searchClick">搜索</view>
     </van-search>
   </view>
