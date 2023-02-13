@@ -346,7 +346,9 @@ Page({
   onReady: function (options) {
     this.data.regionId = wx.getStorageSync(constant.cache_constant.userRegionId);
     this.data.regionName = wx.getStorageSync(constant.cache_constant.userRegionName);
-
+    wx.setNavigationBarTitle({
+      title: '同城易书',
+    })
 
   },
   // 获取用户信息

@@ -9,7 +9,7 @@ Page({
    */
   data: {
     cityList: {},
-    indexList: ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"]
+    indexList: ["-热门城市","A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"]
   },
 
   /**
@@ -36,7 +36,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady() {
-
+    wx.setNavigationBarTitle({
+      title: '城市列表',
+    })
   },
 
   /**
