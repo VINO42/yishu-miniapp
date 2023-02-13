@@ -103,9 +103,7 @@ Page({
    * @param {} e 
    */
   formSubmit: function (e) {
-    wx.showLoading({
-      title: '发布中...',
-    })
+   
 
 
     var regionId = wx.getStorageSync(constant.cache_constant.userRegionId);
@@ -127,6 +125,9 @@ Page({
         return;
       }
     }
+    wx.showLoading({
+      title: '发布中...',
+    })
     //发送请求
     var that = this;
     wx.request({

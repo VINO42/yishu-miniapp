@@ -210,6 +210,53 @@ Page({
     }
     )
   },
+  searchClearClick() {
+
+    var _this = this;
+    var pageIndex = 1;
+
+  
+
+
+    _this.setData({
+      query:'',
+      listArr: [],
+      pageCount: 0
+    })
+
+
+    wx.request({
+      method: "post",
+      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/page?current=' + pageIndex + '&size=' + 10,
+      data: {
+        'title': "",
+        'regionId': this.data.regionId,
+      },
+      header: {
+        'content-type': 'application/json',
+        'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
+      },
+      success: function (res) {
+        var data = res.data.data;
+
+
+        let newList = data.records;
+        _this.setData({
+          pageIndex: pageIndex,
+          pageCount: Math.ceil(data.total / 10),
+          ['listArr[' + (pageIndex - 1) + ']']: newList
+        }),
+          pageIndex += 1
+      },
+      fail: function (res) { },
+      complete: function (res) {
+        // if (!isShowLoading) {
+        //   wx.hideLoading();
+        // }
+      },
+    }
+    )
+  },
   onShow: function () {
     let regionId = app.globalData.regionId;
     let regionName = app.globalData.regionName;
