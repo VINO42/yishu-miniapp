@@ -17,6 +17,7 @@ Page({
   loadInitData() {
     var that = this
     var pageIndex = 1
+
     if (that.data.pageIndex === 1) {
       wx.showLoading({
         title: '加载中...',
@@ -29,7 +30,7 @@ Page({
 
     //发送请求
     wx.request({
-      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/getUserPublisedBooks?current=' + pageIndex + '&size=' + 10,
+      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/getUserPublisedBooks?current=' + pageIndex + '&size=' + 10,
       header: {
         'content-type': 'application/json',
         'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
@@ -52,7 +53,7 @@ Page({
         })
       },
       complete: function (res) {
-        wx.hideLoading();
+          wx.hideLoading();
       },
     })
 
@@ -62,12 +63,14 @@ Page({
     var that = this
     var pageIndex = that.data.pageIndex
     pageIndex += 1
+
     wx.showLoading({
       title: '加载第' + pageIndex + '页',
     })
 
+
     wx.request({
-      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/page?current=' + pageIndex + '&size=' + 10,
+      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/page?current=' + pageIndex + '&size=' + 10,
       data: {
         'title': that.data.query,
         'regionId': this.data.regionId
@@ -90,7 +93,7 @@ Page({
       },
       fail: function (res) { },
       complete: function (res) {
-        wx.hideLoading()
+          wx.hideLoading();
       },
     })
 
@@ -117,6 +120,7 @@ Page({
       wx.showToast({
         title: '没有更多了',
       })
+      
     }
   },
 
@@ -190,7 +194,7 @@ Page({
       .then(() => {
         // on confirm
         wx.request({
-          url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/delete?id=' + _id,
+          url: 'https://wukuaiba.com/wechat/userPublishBookRecord/delete?id=' + _id,
           method: 'POST',
           header: {
             'content-type': 'application/json',

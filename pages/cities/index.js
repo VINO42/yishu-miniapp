@@ -17,7 +17,7 @@ Page({
    */
   onLoad(options) {
     wx.request({
-      url: 'http://127.0.0.1:8888/wechat/common/cities',
+      url: 'https://wukuaiba.com/wechat/common/cities',
       method: 'POST',
       success: res => {
         // cities

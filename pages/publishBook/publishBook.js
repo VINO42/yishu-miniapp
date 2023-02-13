@@ -107,6 +107,7 @@ Page({
       title: '发布中...',
     })
 
+
     var regionId = wx.getStorageSync(constant.cache_constant.userRegionId);
     var regionName = wx.getStorageSync(constant.cache_constant.userRegionName);
     var _conLists = this.data.conLists;
@@ -129,7 +130,7 @@ Page({
     //发送请求
     var that = this;
     wx.request({
-      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/publish',
+      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/publish',
       data: {
         'regionId': this.data.regionId,
         'contract': this.data.contract,
@@ -160,19 +161,21 @@ Page({
         })
       },
       complete: function (res) {
+
         if (res.data.status !== 200000) {
           wx.showToast({
             title: res.data.message,
             icon: 'none',
             duration: 2000
           })
+ 
           return;
         }
         app.globalData.regionId = regionId;
         app.globalData.regionName = regionName;
         app.globalData.publish = 1;
         setTimeout(function () {
-          wx.hideLoading()
+            wx.hideLoading();
         }, 3000)
         that.setData({
           regionName: wx.getStorageSync(constant.cache_constant.userRegionName),

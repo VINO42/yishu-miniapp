@@ -59,5 +59,8 @@
     "van-dialog": "@vant/weapp/dialog/index"
      },
   "sitemapLocation": "sitemap.json",
+  "networkTimeout": {
+    "request": 10000
+  },
   "lazyCodeLoading": "requiredComponents"
 }

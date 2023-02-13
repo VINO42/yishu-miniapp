@@ -15,7 +15,7 @@ Page({
   onLoad(options) {
     let id = options.id;
     wx.request({
-      url: 'http://127.0.0.1:8888/wechat/userPublishBookRecord/getPublishById?id='+id,
+      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/getPublishById?id='+id,
       method: 'GET',
       header: {
         'content-type': 'application/json',
