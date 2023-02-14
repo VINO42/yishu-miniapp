@@ -1,4 +1,5 @@
 //获取应用实例 BD3124
+
 var constant = require('../../utils/constant');
 import Dialog from '@vant/weapp/dialog/dialog';
 
@@ -17,7 +18,10 @@ Page({
   loadInitData() {
     var that = this
     var pageIndex = 1
-
+    let token = wx.getStorageSync(constant.cache_constant.userToken);
+    if (!token) {
+      return;
+    }
     if (that.data.pageIndex === 1) {
       wx.showLoading({
         title: '加载中...',
@@ -39,6 +43,16 @@ Page({
       success: function (res) {
         // var data = JSON.parse(Dec.Decrypt(res.data));
         var data = res.data.data;
+        if (res.data.status == 401001) {
+          wx.showLoading({
+            title: '登录过期',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+            wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+          }, 1500)
+           return;
+        }
 
         var tempList = res.data.data.records;
         that.setData({
@@ -53,7 +67,17 @@ Page({
         })
       },
       complete: function (res) {
-          wx.hideLoading();
+        if (res.data.status == 401001) {
+          wx.showLoading({
+            title: '登录过期',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+            wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+          }, 1500)
+           return;
+        }
+        wx.hideLoading();
       },
     })
 
@@ -63,7 +87,25 @@ Page({
     var that = this
     var pageIndex = that.data.pageIndex
     pageIndex += 1
-
+    let token = wx.getStorageSync(constant.cache_constant.userToken);
+    if (!token) {
+      wx.showModal({
+        title: "请先授权登录",
+        content: "拒绝授权，则无法使用当前小程序",
+        showCancel: true,
+        cancelText: "不授权",
+        cancelColor: 'skyblue',
+        confirmText: "去授权",
+        success(res) {
+          if (res.confirm) {
+            wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+          } else if (res.cancel) {
+            wx.reLaunch({ url: '../index/index' });
+          }
+        }
+      })
+      return;
+    }
     wx.showLoading({
       title: '加载第' + pageIndex + '页',
     })
@@ -82,6 +124,16 @@ Page({
       method: 'POST',
       success: function (res) {
         var data = res.data.data;
+        if (res.data.status == 401001) {
+          wx.showLoading({
+            title: '登录过期',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+            wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+          }, 1500)
+           return;
+        }
 
         //将新一页的数据添加到原数据后面
         let newList = data.records;
@@ -93,7 +145,17 @@ Page({
       },
       fail: function (res) { },
       complete: function (res) {
-          wx.hideLoading();
+        if (res.data.status == 401001) {
+          wx.showLoading({
+            title: '登录过期',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+            wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+          }, 1500)
+           return;
+        }
+        wx.hideLoading();
       },
     })
 
@@ -120,14 +182,52 @@ Page({
       wx.showToast({
         title: '没有更多了',
       })
-      
+
     }
   },
 
   onShow: function () {
+
     this.loadInitData();
   },
   onLoad: function (opions) {
+    wx.request({
+      url: 'https://wukuaiba.com/wechat/common/check',
+      method: 'POST',
+      success: res => {
+        // geo
+        if(res.data.data){
+          console.log(res.data.data);
+          app.editTabBar();
+        }else{
+          console.log(res.data.data);
+          app.editTabBar2();
+        }
+      }
+    });
+
+    let token = wx.getStorageSync(constant.cache_constant.userToken);
+    if (!token) {
+      console.log(123)
+      wx.showModal({
+        title: "请先授权登录",
+        content: "拒绝授权，则无法使用当前小程序",
+        showCancel: true,
+        cancelText: "不授权",
+        cancelColor: 'skyblue',
+        confirmText: "去授权",
+        success(res) {
+          if (res.confirm) {
+            wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+          } else if (res.cancel) {
+            wx.reLaunch({ url: '../index/index' });
+          }
+        }
+      })
+      return;
+    }
+    console.log(1234)
+
     let currPages = getCurrentPages();
 
     let regionId1 = wx.getStorageSync(constant.cache_constant.userRegionId);
@@ -190,6 +290,25 @@ Page({
   deleteMyPublishedBook(e) {
     console.log("deleted")
     var _id = e.currentTarget.dataset.id;
+    let token = wx.getStorageSync(constant.cache_constant.userToken);
+    if (!token) {
+      wx.showModal({
+        title: "请先授权登录",
+        content: "拒绝授权，则无法使用当前小程序",
+        showCancel: true,
+        cancelText: "不授权",
+        cancelColor: 'skyblue',
+        confirmText: "去授权",
+        success(res) {
+          if (res.confirm) {
+            wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+          } else if (res.cancel) {
+            wx.reLaunch({ url: '../index/index' });
+          }
+        }
+      })
+      return;
+    }
     Dialog.confirm({
       title: '删除',
       message: '确定删除该图书发布?',
@@ -204,6 +323,17 @@ Page({
             'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
           },
           success: res => {
+            if (res.data.status == 401001) {
+              wx.showLoading({
+                title: '登录过期',
+              })
+              setTimeout(function () {
+                wx.hideLoading()
+                wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
+              }, 1500)
+               return;
+            }
+
             this.onLoad()
           }
         });

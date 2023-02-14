@@ -1,3 +1,5 @@
+<import src="../tablebar/tablebar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
 <view style="padding-top: 10rpx;">
   <van-card desc="{{book.bookIntro}}" title="{{book.title}}" thumb="{{book.pic}}">
     <view slot="footer">
@@ -8,7 +10,7 @@
         </view>
         <view style="align-items: right;margin-right: 5rpx;padding-top: 30rpx;">
           <image class='mine_headicon' src='{{book.avatar}}' slot="icon"></image>
-          <text class='pub_class' value="">{{book.nickName}} 于 {{book.dayBefor}} 发布</text>
+          <text class='pub_class' value="">{{book.nickName}}  {{book.dayBefor}} </text>
         </view>
         <view style="align-items: right;margin-right: 5rpx;padding-top: 60rpx;">
           <text>备注信息：{{book.remark}}</text>

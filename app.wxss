@@ -18,3 +18,36 @@ page {
    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
    sans-serif;
 }
+
+.menu-item{  
+  width: 48%;  
+  float: left;  
+  text-align: center;  
+  padding-top: 8px;  
+}  
+.menu-item2{  
+  width: 30%;  
+  float: left;  
+  text-align: center;  
+  padding-top: 8px;  
+}  
+.img{  
+  width: 80rpx;  
+  height: 80rpx;  
+  display: block;  
+  margin:auto; 
+}  
+.clear{  
+  clear: both;  
+}  
+.tab-bar{  
+  position: fixed;  
+  width: 100%;  
+  padding: 0px 2%;  
+  z-index:9999999;
+}  
+.tabbar_text{
+  font-size: 24rpx
+}
+
+

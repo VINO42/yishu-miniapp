@@ -1,4 +1,6 @@
 <!-- 我的页面 -->
+<import src="../tablebar/tablebar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
 <view>
   <van-dialog id="van-dialog" />
   <van-toast id="van-toast" />
@@ -13,7 +15,7 @@
             </view>
             <view style="align-items: right;margin-right: 5rpx;">
               <text>
-                {{item.publishDate}} 发布
+                {{item.publishDate}} 
               </text>
             </view>
           </view>

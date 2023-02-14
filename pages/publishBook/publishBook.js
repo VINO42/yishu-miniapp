@@ -27,6 +27,20 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.request({
+      url: 'https://wukuaiba.com/wechat/common/check',
+      method: 'POST',
+      success: res => {
+        // geo
+        if(res.data.data){
+          console.log(res.data.data);
+          app.editTabBar();
+        }else{
+          console.log(res.data.data);
+          app.editTabBar2();
+        }
+      }
+    });
     this.setData({
       regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
       regionId: wx.getStorageSync(constant.cache_constant.userRegionId)
@@ -105,95 +119,150 @@ Page({
    * @param {} e 
    */
   formSubmit: function (e) {
-   
-
-
-    var regionId = wx.getStorageSync(constant.cache_constant.userRegionId);
-    var regionName = wx.getStorageSync(constant.cache_constant.userRegionName);
-    var _conLists = this.data.conLists;
-    if (_conLists.length == 0) {
-      wx.showToast({
-        title: '请添加书籍',
-        icon: 'none'
+    let token = wx.getStorageSync(constant.cache_constant.userToken);
+    if (!token) {
+      wx.showModal({
+        title: "请先授权登录",
+        content: "拒绝授权，则无法使用当前小程序",
+        showCancel: true,
+        cancelText: "不授权",
+        cancelColor:'skyblue', 
+        confirmText: "去授权",
+        success(res) {
+          if (res.confirm) {
+            wx.reLaunch({ url: '../login/login?page=../publishBook/publishBook' })
+          } else if (res.cancel) {
+            wx.reLaunch({ url: '../index/index' });
+          }
+        }
       })
-      return;
-    }
-    for (let i = 0; i < _conLists.length; i++) {
-      if (!_conLists[i].isbn) {
+    } else {
+      var regionId = wx.getStorageSync(constant.cache_constant.userRegionId);
+      var regionName = wx.getStorageSync(constant.cache_constant.userRegionName);
+      var _conLists = this.data.conLists;
+      if (_conLists.length == 0) {
         wx.showToast({
-          title: '请输入第' + `${i * 1 + 1}` + '本书的ISBN码',
+          title: '请添加书籍',
+          icon: 'none',
+          duration: 2000
+        })
+        return;
+      }
+      if(_conLists.length>5){
+        wx.showToast({
+          title: '每次最多发布五本闲置书籍',
           icon: 'none'
         })
         return;
       }
-    }
-    wx.showLoading({
-      title: '发布中...',
-    })
-    //发送请求
-    var that = this;
-    wx.request({
-      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/publish',
-      data: {
-        'regionId': this.data.regionId,
-        'contract': this.data.contract,
-        'books': _conLists
-      },
-      header: {
-        'content-type': 'application/json',
-        'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
-      },
-      method: 'POST',
-      success: function (res) {
-        if (res.data.status !== 200000) {
+      
+      for (let i = 0; i < _conLists.length; i++) {
+        if (!_conLists[i].isbn) {
           wx.showToast({
-            title: res.data.message,
-            icon: 'none',
-            duration: 2000
+            title: '请输入第' + `${i * 1 + 1}` + '本书的ISBN码',
+            icon: 'none'
           })
           return;
         }
-        app.globalData.regionId = regionId;
-        app.globalData.regionName = regionName;
-        app.globalData.publish = 1;
-        // 提交成功设置为初始值
-      },
-      fail: function (res) {
-        wx.showLoading({
-          title: '加载失败...',
-        })
-      },
-      complete: function (res) {
+      }
+      wx.showLoading({
+        title: '发布中...',
+      })
+      //发送请求
+      var that = this;
+      wx.request({
+        url: 'https://wukuaiba.com/wechat/userPublishBookRecord/publish',
+        data: {
+          'regionId': this.data.regionId,
+          'contract': this.data.contract,
+          'books': _conLists
+        },
+        header: {
+          'content-type': 'application/json',
+          'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
+        },
+        method: 'POST',
+        success: function (res) {
+          if(res.data.status==401001){
+            wx.showLoading({
+             title: '登录过期,跳转授权登录中',
+           })
+           setTimeout(function () {
+             wx.hideLoading()
+             wx.reLaunch({ url: '../login/login?page=../publishBook/publishBook' })
+           }, 2000)
+           return;
+         }
+          if (res.data.status !== 200000) {
+            console.log(343333)
+            wx.showToast({
+              title: res.data.message,
+              icon: 'none',
+              duration: 3000
+            })
+            return;
+          }
+          app.globalData.regionId = regionId;
+          app.globalData.regionName = regionName;
+          app.globalData.publish = 1;
+          // 提交成功设置为初始值
+        },
+        fail: function (res) {
+          if(res.data.status==401001){
+            wx.showLoading({
+             title: '登录过期,跳转授权登录中',
+           })
+           setTimeout(function () {
+             wx.hideLoading()
+             wx.reLaunch({ url: '../login/login?page=../publishBook/publishBook' })
+           }, 2000)
+           return;
+         }
+          wx.showLoading({
+            title: '加载失败...',
+          })
+        },
+        complete: function (res) {
+          if(res.data.status==401001){
+             wx.showLoading({
+              title: '登录过期,跳转授权登录中',
+            })
+            setTimeout(function () {
+              wx.hideLoading()
+              wx.reLaunch({ url: '../login/login?page=../publishBook/publishBook' })
+            }, 2000)
+            return;
+          }
+          if (res.data.status !== 200000) {
+            wx.showToast({
+              title: res.data.message,
+              icon: 'none',
+              duration: 2000
+            })
 
-        if (res.data.status !== 200000) {
-          wx.showToast({
-            title: res.data.message,
-            icon: 'none',
-            duration: 2000
-          })
- 
-          return;
-        }
-        app.globalData.regionId = regionId;
-        app.globalData.regionName = regionName;
-        app.globalData.publish = 1;
-        setTimeout(function () {
+            return;
+          }
+          app.globalData.regionId = regionId;
+          app.globalData.regionName = regionName;
+          app.globalData.publish = 1;
+          setTimeout(function () {
             wx.hideLoading();
-        }, 3000)
-        that.setData({
-          regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
-          regionId: wx.getStorageSync(constant.cache_constant.userRegionId),
-          contract: "",
-          conLists: [{
-            isbn: '',
-            remark: ''
-          }]
-        })
-        wx.switchTab({
-          url: '/pages/index/index',
-        })
-      },
-    })
+          }, 3000)
+          that.setData({
+            regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
+            regionId: wx.getStorageSync(constant.cache_constant.userRegionId),
+            contract: "",
+            conLists: [{
+              isbn: '',
+              remark: ''
+            }]
+          })
+          wx.switchTab({
+            url: '/pages/index/index',
+          })
+        },
+      })
+    }
   },
   /**
    * 添加书籍事件

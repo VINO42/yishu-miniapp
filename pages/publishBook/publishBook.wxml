@@ -1,3 +1,5 @@
+<import src="../tablebar/tablebar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
 <view class="container">
   <view>
     <form bindsubmit="formSubmit">

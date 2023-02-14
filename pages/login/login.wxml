@@ -1,2 +1,22 @@
-<!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<view wx:if="{{isHide}}">
+  <view wx:if="{{canIUse}}">
+    <view class='header'>
+      <image src='/images/icon.jpg'></image>
+    </view>
+
+    <view class='content' style="position: center;">
+      <view>同城易书，一个同城地域下的交换闲置书籍的小程序。</view>
+      <view>同城易书小程序申请获取以下权限</view>
+      <text>获得你的公开信息(昵称，头像等)</text>
+      <text>获取当前的模糊地理位置</text>
+    </view>
+
+    <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
+      同意授权登录
+    </button>
+    <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN"  bindtap="cancleAuth">
+      不同意授权登录
+    </button>
+  </view>
+  <view wx:else>请升级微信版本</view>
+</view>

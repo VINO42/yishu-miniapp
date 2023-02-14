@@ -13,21 +13,86 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    let id = options.id;
     wx.request({
-      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/getPublishById?id='+id,
+      url: 'https://wukuaiba.com/wechat/common/check',
+      method: 'POST',
+      success: res => {
+        // geo
+        if(res.data.data){
+          console.log(res.data.data);
+          app.editTabBar();
+        }else{
+          console.log(res.data.data);
+          app.editTabBar2();
+        }
+      }
+    });
+    let token = wx.getStorageSync(constant.cache_constant.userToken);
+    if (!token) {
+      wx.showModal({
+        title: "请先授权登录",
+        content: "拒绝授权，则无法使用当前小程序",
+        showCancel: true,
+        cancelText: "不授权",
+        cancelColor: 'skyblue',
+        confirmText: "去授权",
+        success(res) {
+          if (res.confirm) {
+            wx.reLaunch({ url: '../login/login?page=../index/index' })
+          } else if (res.cancel) {
+            wx.reLaunch({ url: '../index/index' });
+          }
+        }
+      })
+      return;
+    }
+    let id = options.id;
+    console.log(id)
+    wx.request({
+      url: 'https://wukuaiba.com/wechat/userPublishBookRecord/getPublishById?id=' + id,
       method: 'GET',
       header: {
         'content-type': 'application/json',
         'X-Token-Header': wx.getStorageSync(constant.cache_constant.userToken)
       },
       success: res => {
-        console.log(res.data.data)
-        this.setData({
-          book:res.data.data
-        })
-        console.log( this.data.book)
 
+        if (res.data.status == 401001) {
+          wx.showLoading({
+            title: '登录过期',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+            wx.reLaunch({ url: '../login/login?page=../index/index' })
+          }, 1500)
+          return;
+        }
+        this.setData({
+          book: res.data.data
+        })
+        console.log(this.data.book)
+
+      },
+      complete: res => {
+        if (res.data.status == 401001) {
+          wx.showLoading({
+            title: '登录过期',
+          })
+          setTimeout(function () {
+            wx.hideLoading()
+            wx.reLaunch({ url: '../login/login?page=../index/index' })
+          }, 1500)
+          return;
+        }
+        if (res.data.status !== 200000) {
+          wx.showToast({
+            title: res.data.message,
+            icon: 'none',
+            duration: 2000
+          })
+
+          return;
+        }
       }
     });
   },
@@ -60,7 +125,7 @@ Page({
    */
   onUnload() {
     this.setData({
-      book:{}
+      book: {}
     })
   },
 

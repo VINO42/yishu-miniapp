@@ -27,6 +27,7 @@ Page({
         console.log(this.data.cityList);
         this.setData({
           cityList: res.data.data
+          
         })
       }
     });

@@ -6,7 +6,8 @@
     "pages/myBooks/myBooks",
     "pages/cities/index",
     "pages/login/login",
-    "pages/bookDetail/bookDetail"
+    "pages/bookDetail/bookDetail",
+    "pages/tablebar/tablebar"
   ],
   "permission": {
     "scope.userFuzzyLocation": {
@@ -23,41 +24,20 @@
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "images/home.png",
-        "selectedIconPath": "images/home.png"
-      },
-      {
-        "pagePath": "pages/publishBook/publishBook",
-        "text": "发布图书",
-        "iconPath": "images/upload.png",
-        "selectedIconPath": "images/upload.png"
-      },
-      {
-        "pagePath": "pages/myBooks/myBooks",
-        "text": "我的发布",
-        "iconPath": "images/mine.png",
-        "selectedIconPath": "images/mine.png"
-      }
-    ]
-  },
+
   "usingComponents": {
     "van-toast": "@vant/weapp/toast/index",
     "van-icon": "@vant/weapp/icon/index",
-     "van-search": "@vant/weapp/search/index",  
+    "van-search": "@vant/weapp/search/index",
     "van-cell": "@vant/weapp/cell/index",
-     "van-row": "@vant/weapp/row/index",
+    "van-row": "@vant/weapp/row/index",
     "van-card": "@vant/weapp/card/index",
     "van-index-bar": "@vant/weapp/index-bar/index",
     "van-index-anchor": "@vant/weapp/index-anchor/index",
     "van-loading": "@vant/weapp/loading/index",
     "van-divider": "@vant/weapp/divider/index",
     "van-dialog": "@vant/weapp/dialog/index"
-     },
+  },
   "sitemapLocation": "sitemap.json",
   "networkTimeout": {
     "request": 10000

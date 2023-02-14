@@ -1,25 +1,8 @@
-<view wx:if="{{isHide}}">
-  <view wx:if="{{canIUse}}">
-    <view class='header'>
-      <image src='/images/icon.jpg'></image>
-    </view>
-
-    <view class='content' style="position: center;">
-      <view>同城易书小程序申请获取以下权限</view>
-      <text>获得你的公开信息(昵称，头像等)</text>
-      <text>获取当前的模糊地理位置</text>
-    </view>
-
-    <button class='bottom' type='primary' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo">
-      授权登录
-    </button>
-  </view>
-  <view wx:else>请升级微信版本</view>
-</view>
+<import src="../tablebar/tablebar.wxml" />  
+<template is="tabBar" data="{{tabBar: tabBar}}" /> 
 <!-- 首页页面 -->
-<view wx:else>
+<view>
   <van-toast id="van-toast" />
-
   <view class="topView">
     <van-cell class="cities van-ellipsis" icon='https://pic2.58cdn.com.cn/nowater/webim/big/n_v271448697c7194992a90c8033a6cb549d.png' bindtap="bindCities" title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
     <van-search field-class="searchosition"  custom-class="searchFooosition" value="{{ inputval }}" placeholder="请输入书名或ISBN码" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="searchClick" bind:clear	="searchClearClick" shape="round">
@@ -29,7 +12,7 @@
   <scroll-view class="scrollview" scroll-y="true" bindscroll="scrollTopFun">
     <block wx:for="{{listArr}}" wx:key="index" wx:for-item="caption">
       <view wx:for="{{caption}}" wx:key="index">
-        <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}" thumb-link="../bookDetail/bookDetail?id={{item.id}}" bindtap="redirectToDetail">
+        <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}"  bindtap="redirectToDetail">
           <view slot="footer">
             <van-divider hairline borderColor="#999966" />
             <view  style="align-items: right;margin-right: 5rpx; padding-top: 10rpx;">
@@ -37,12 +20,11 @@
             </view>
             <view style="align-items: right;margin-right: 5rpx; padding-top: 20rpx;">
               <image class='mine_headicon' src='{{item.avatar}}' slot="icon"></image>
-              <text class='pub_class' value="">{{item.nickName}} 于 {{item.dayBefor}} 发布</text>
+              <text class='pub_class' value="">{{item.nickName}}  {{item.dayBefor}} </text>
             </view>
           </view>
         </van-card>
         <van-divider borderColor="#BD3124" />
-
       </view>
     </block>
   </scroll-view>
