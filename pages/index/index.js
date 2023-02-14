@@ -270,10 +270,10 @@ Page({
       method: 'POST',
       success: res => {
         // geo
-        if(res.data.data){
+        if (res.data.data) {
           console.log(res.data.data);
           app.editTabBar();
-        }else{
+        } else {
           console.log(res.data.data);
           app.editTabBar2();
         }
@@ -306,8 +306,8 @@ Page({
               wx.setStorageSync(constant.cache_constant.userRegionId, res.data.data.id);
               wx.setStorageSync(constant.cache_constant.userRegionName, res.data.data.name);
               that.setData({
-                regionId:  res.data.data.id,
-                regionName:  res.data.data.name
+                regionId: res.data.data.id,
+                regionName: res.data.data.name
               });
             }
           });

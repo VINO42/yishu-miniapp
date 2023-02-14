@@ -1,6 +1,6 @@
 <!-- 我的页面 -->
-<import src="../tablebar/tablebar.wxml" />  
-<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<import src="../tablebar/tablebar.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" />
 <view>
   <van-dialog id="van-dialog" />
   <van-toast id="van-toast" />
@@ -9,13 +9,13 @@
       <view wx:for="{{caption}}" wx:key="index">
         <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}" thumb-link="../bookDetail/bookDetail?id={{item.id}}" bindtap="redirectToDetail">
           <view slot="footer">
-          <van-divider hairline borderColor="#999966" />
+            <van-divider hairline borderColor="#999966" />
             <view style="align-items: right;margin-right: 5rpx;">
               <text>{{item.regionName}}</text>
             </view>
             <view style="align-items: right;margin-right: 5rpx;">
               <text>
-                {{item.publishDate}} 
+                {{item.publishDate}}
               </text>
             </view>
           </view>

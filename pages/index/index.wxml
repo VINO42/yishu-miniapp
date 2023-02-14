@@ -1,26 +1,26 @@
-<import src="../tablebar/tablebar.wxml" />  
-<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<import src="../tablebar/tablebar.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" />
 <!-- 首页页面 -->
 <view>
   <van-toast id="van-toast" />
   <view class="topView">
     <van-cell class="cities van-ellipsis" icon='https://pic2.58cdn.com.cn/nowater/webim/big/n_v271448697c7194992a90c8033a6cb549d.png' bindtap="bindCities" title="{{regionName}}" is-link id="{{regionId}}" arrow-direction="down" />
-    <van-search field-class="searchosition"  custom-class="searchFooosition" value="{{ inputval }}" placeholder="请输入书名或ISBN码" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="searchClick" bind:clear	="searchClearClick" shape="round">
+    <van-search field-class="searchosition" custom-class="searchFooosition" value="{{ inputval }}" placeholder="请输入书名或ISBN码" input-align="left" use-action-slot show-action bind:blur="inputEvent" bind:search="searchClick" bind:clear="searchClearClick" shape="round">
       <view slot="action" bind:tap="searchClick">搜索</view>
     </van-search>
   </view>
   <scroll-view class="scrollview" scroll-y="true" bindscroll="scrollTopFun">
     <block wx:for="{{listArr}}" wx:key="index" wx:for-item="caption">
       <view wx:for="{{caption}}" wx:key="index">
-        <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}"  bindtap="redirectToDetail">
+        <van-card id='{{item.id}}' desc-class="van-multi-ellipsis--l3" title="{{item.title}}" desc='{{item.bookIntro}}' thumb="{{item.pic}}" bindtap="redirectToDetail">
           <view slot="footer">
             <van-divider hairline borderColor="#999966" />
-            <view  style="align-items: right;margin-right: 5rpx; padding-top: 10rpx;">
+            <view style="align-items: right;margin-right: 5rpx; padding-top: 10rpx;">
               <text>{{item.regionName}}</text>
             </view>
             <view style="align-items: right;margin-right: 5rpx; padding-top: 20rpx;">
               <image class='mine_headicon' src='{{item.avatar}}' slot="icon"></image>
-              <text class='pub_class' value="">{{item.nickName}}  {{item.dayBefor}} </text>
+              <text class='pub_class' value="">{{item.nickName}} {{item.dayBefor}} </text>
             </view>
           </view>
         </van-card>

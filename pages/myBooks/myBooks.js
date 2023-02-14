@@ -51,7 +51,7 @@ Page({
             wx.hideLoading()
             wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
           }, 1500)
-           return;
+          return;
         }
 
         var tempList = res.data.data.records;
@@ -75,7 +75,7 @@ Page({
             wx.hideLoading()
             wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
           }, 1500)
-           return;
+          return;
         }
         wx.hideLoading();
       },
@@ -132,7 +132,7 @@ Page({
             wx.hideLoading()
             wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
           }, 1500)
-           return;
+          return;
         }
 
         //将新一页的数据添加到原数据后面
@@ -153,7 +153,7 @@ Page({
             wx.hideLoading()
             wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
           }, 1500)
-           return;
+          return;
         }
         wx.hideLoading();
       },
@@ -196,10 +196,10 @@ Page({
       method: 'POST',
       success: res => {
         // geo
-        if(res.data.data){
+        if (res.data.data) {
           console.log(res.data.data);
           app.editTabBar();
-        }else{
+        } else {
           console.log(res.data.data);
           app.editTabBar2();
         }
@@ -331,7 +331,7 @@ Page({
                 wx.hideLoading()
                 wx.reLaunch({ url: '../login/login?page=../myBooks/myBooks' })
               }, 1500)
-               return;
+              return;
             }
 
             this.onLoad()

@@ -1,10 +1,8 @@
-<import src="../tablebar/tablebar.wxml" />  
-<template is="tabBar" data="{{tabBar: tabBar}}" /> 
+<import src="../tablebar/tablebar.wxml" />
+<template is="tabBar" data="{{tabBar: tabBar}}" />
 <view class="container">
   <view>
     <form bindsubmit="formSubmit">
-      <!-- <van-cell name='regionId' title="{{regionName}}" custom-class="cities" style='align-items: center;' bindtap="bindCities" id="{{regionId}}" icon='https://pic2.58cdn.com.cn/nowater/webim/big/n_v271448697c7194992a90c8033a6cb549d.png' arrow-direction="down">
-      </van-cell> -->
       <view class='top_class'>
         <van-cell name='regionId' title="{{regionName}}" bindtap="bindCities" id="{{regionId}}" arrow-direction="down">
           <van-icon slot='icon' style="padding-right: 5rpx;padding-left: 10rpx;" size="25px" name="https://pic2.58cdn.com.cn/nowater/webim/big/n_v271448697c7194992a90c8033a6cb549d.png" />
@@ -15,26 +13,26 @@
       <view>
         <block wx:for="{{conLists}}" wx:key="index">
           <van-divider borderColor="#BD3124" />
-          <view class='template_title_list flex-x' >
+          <view class='template_title_list flex-x'>
             <view class='template_title flex-x' style="padding-left: 150rpx;" bindtap='del' data-index='{{index}}'>
               <view class='del_con flex-x'>
                 <text>- 移除</text>
               </view>
             </view>
-            <input bindinput='changeConTitle'  style='padding-top: 3rpx;' placeholder-class="label_class" data-index='{{index}}' data-isbn='{{isbn}}' cursor-spacing='20' class='bookinfo' placeholder='请输入书籍ISBN码' />
+            <input bindinput='changeConTitle' style='padding-top: 3rpx;' placeholder-class="label_class" data-index='{{index}}' data-isbn='{{isbn}}' cursor-spacing='20' class='bookinfo' placeholder='请输入书籍ISBN码' />
             <van-divider borderColor="#b8b894" />
-            <input bindinput='changeRemark'  style='padding-top: 2rpx;' placeholder-class="label_class" data-index='{{index}}' data-remark='{{remark}}' cursor-spacing='20' class='remark' placeholder='请输入发布备注' />
+            <input bindinput='changeRemark' style='padding-top: 2rpx;' placeholder-class="label_class" data-index='{{index}}' data-remark='{{remark}}' cursor-spacing='20' class='remark' placeholder='请输入发布备注' />
           </view>
         </block>
       </view>
-      <view class='template_title flex-x' bindtap='add'  style="padding-left: 80rpx;" >
+      <view class='template_title flex-x' bindtap='add' style="padding-left: 80rpx;">
         <view class='add_con flex-x'>
           <text>＋ 添加书籍</text>
         </view>
       </view>
       <view>
         <van-divider borderColor="#BD3124" />
-        <input name='contract'  style='padding-top: 2rpx;' bindinput='changeContract' placeholder-class="label_class" value='{{contract}}' bindinput='changeContract' cursor-spacing='20' class='contract' placeholder='请输入联系方式' />
+        <input name='contract' style='padding-top: 2rpx;' bindinput='changeContract' placeholder-class="label_class" value='{{contract}}' bindinput='changeContract' cursor-spacing='20' class='contract' placeholder='请输入联系方式' />
       </view>
       <van-divider borderColor="#BD3124" />
       <button size='default' style='border-color: #BD3124; padding-top: 2rpx;' form-type="submit" plain class="subButtom">发布</button>

@@ -18,10 +18,10 @@ Page({
       method: 'POST',
       success: res => {
         // geo
-        if(res.data.data){
+        if (res.data.data) {
           console.log(res.data.data);
           app.editTabBar();
-        }else{
+        } else {
           console.log(res.data.data);
           app.editTabBar2();
         }

@@ -99,7 +99,7 @@ Page({
     })
 
   },
-  cancleAuth: function(e){
+  cancleAuth: function (e) {
     wx.reLaunch({ url: '../index/index' })
   },
   // 获取用户信息
@@ -143,7 +143,7 @@ Page({
                       wx.setStorageSync(constant.cache_constant.userToken, res.data.data.token);
 
 
-            
+
                       //用户按了允许授权按钮
                       // 获取到用户的信息了，打印到控制台上看下
                       wx.setStorageSync(constant.cache_constant.nickName, e.detail.userInfo.nickName);

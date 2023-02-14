@@ -1,8 +1,8 @@
 // app.js
 globalData: {
-  regionId:null;
+  regionId: null;
   regionName: "全国";
-  publish:null
+  publish: null
 }
 App({
   onLaunch() {
@@ -48,7 +48,7 @@ App({
     _curPage.setData({
       tabBar: tabBar
     });
-  },  
+  },
 
   globalData: {
     userInfo: null,
@@ -92,8 +92,8 @@ App({
           "selectedIconPath": "/images/home.png",
           "clas": "menu-item2",
           active: true
-        },      
-         {
+        },
+        {
           "pagePath": "/pages/publishBook/publishBook",
           "text": "发布图书",
           "iconPath": "/images/upload.png",
@@ -102,7 +102,7 @@ App({
           active: true
         },
         {
-          "pagePath": "pages/myBooks/myBooks",
+          "pagePath": "/pages/myBooks/myBooks",
           "text": "我的发布",
           "iconPath": "/images/mine.png",
           "selectedIconPath": "/images/mine.png",

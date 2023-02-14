@@ -1,5 +1,5 @@
 var constant = require('../../utils/constant');
-const app=getApp()  
+const app = getApp()
 
 // pages/cities.js
 Page({
@@ -9,7 +9,7 @@ Page({
    */
   data: {
     cityList: {},
-    indexList: ["-热门城市","A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"]
+    indexList: ["-热门城市", "A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"]
   },
 
   /**
@@ -27,7 +27,7 @@ Page({
         console.log(this.data.cityList);
         this.setData({
           cityList: res.data.data
-          
+
         })
       }
     });
@@ -93,22 +93,22 @@ Page({
     //给上个页面赋值
     prevPage.setData({ regionId: id })
     prevPage.setData({ regionName: name })
-    app.globalData.regionId=id;
-    app.globalData.regionName=name;
+    app.globalData.regionId = id;
+    app.globalData.regionName = name;
 
     prevPage.setData({ listArr: [] })
     console.log(prevPage)
-    if(prevPage.route==='pages/index/index'){
+    if (prevPage.route === 'pages/index/index') {
       prevPage.loadInitData();
       wx.navigateBack({
         delta: 1,
       })
-    }else{
+    } else {
       wx.navigateBack({
         delta: 1,
       })
     }
-  
+
   },
 
 
