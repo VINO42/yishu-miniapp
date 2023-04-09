@@ -189,7 +189,7 @@ Page({
             })
             setTimeout(function () {
               wx.hideLoading()
-              wx.reLaunch({ url: '../login/login?page=../publishBook/publishBook' })
+              wx.reLaunch({ url: '../index/index' });
             }, 2000)
             return;
           }
@@ -201,13 +201,15 @@ Page({
             })
             return;
           }
+          console.log("发布成功")
+
           app.globalData.regionId = regionId;
           app.globalData.regionName = regionName;
           app.globalData.publish = 1;
           // 提交成功设置为初始值
           setTimeout(function () {
             wx.hideLoading();
-          }, 3000)
+          }, 2000)
           that.setData({
             regionName: wx.getStorageSync(constant.cache_constant.userRegionName),
             regionId: wx.getStorageSync(constant.cache_constant.userRegionId),
@@ -217,9 +219,11 @@ Page({
               remark: ''
             }]
           })
-          wx.switchTab({
-            url: '/pages/index/index',
-          })
+          wx.reLaunch({ url: '../index/index' })
+
+          // wx.switchTab({
+          //   url: '/pages/index/index',
+          // })
         },
         fail: function (res) {
           if (res.data.status == 401001) {
